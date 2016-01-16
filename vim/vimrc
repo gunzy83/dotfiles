@@ -19,7 +19,7 @@ set wildmenu
 set showcmd
 set autowrite
 set hidden  
-set mouse=a
+
 set history=1000
 set scrolloff=5
 set ruler
@@ -42,5 +42,5 @@ filetype plugin indent on
 
 let g:airline_powerline_fonts = 1
 set laststatus=2
-let g:airline_theme='monokai'
+let g:airline_theme='dark'
 

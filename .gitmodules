@@ -1,0 +1,6 @@
+[submodule "zgen"]
+	path = zgen
+	url = https://github.com/tarjoilija/zgen.git
+[submodule "vim/Vundle.vim"]
+	path = vim/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git

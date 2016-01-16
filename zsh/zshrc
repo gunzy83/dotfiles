@@ -1,9 +1,4 @@
-# For sudo-ing aliases
-# https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
-alias sudo='sudo '
-
-alias packer="packer-io"
-alias lh='ls -a | egrep "^\."'
+#!/bin/zsh
 
 # Set up dircolors for GNU ls
 eval `dircolors ~/.dircolors`
@@ -17,7 +12,7 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 
 # load zgen
-source "${HOME}/projects/zgen/zgen.zsh"
+source "${HOME}/.zgen/zgen.zsh"
 
 # check if there's no init script
 if ! zgen saved; then
@@ -64,7 +59,16 @@ if ! zgen saved; then
     # save all to init script
     zgen save
 fi
+
+# Source terminal theme
 source ~/.zsh/gunzy.zsh-theme
 
+# Source aliases
+source ~/.zsh/alias/*.zsh
+
+# Source functions
+source ~/.zsh/function/*.zsh
+
+# Temporarily include this until I work out where to put it
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
