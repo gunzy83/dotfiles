@@ -1,0 +1,70 @@
+# For sudo-ing aliases
+# https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
+alias sudo='sudo '
+
+alias packer="packer-io"
+alias lh='ls -a | egrep "^\."'
+
+# Set up dircolors for GNU ls
+eval `dircolors ~/.dircolors`
+
+# Ensure languages are set
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Ensure editor is set
+export EDITOR=vim
+
+# load zgen
+source "${HOME}/projects/zgen/zgen.zsh"
+
+# check if there's no init script
+if ! zgen saved; then
+    echo "Creating a zgen save"
+
+    zgen oh-my-zsh
+
+    # plugins
+    if (( $+commands[adb] )) ; then
+        zgen oh-my-zsh plugins/adb
+    fi
+    if (( $+commands[aws] )) ; then
+        zgen oh-my-zsh plugins/aws
+    fi
+    if (( $+commands[pygmentize] )) ; then
+        zgen oh-my-zsh plugins/colorize
+    fi
+    zgen oh-my-zsh plugins/cp
+    if (( $+commands[docker] )) ; then
+        zgen oh-my-zsh plugins/docker
+    fi
+    if (( $+commands[gem] )) ; then
+        zgen oh-my-zsh plugins/gem
+    fi
+    if (( $+commands[geeknote] )) ; then
+        zgen load bogwonch/Geeknote-Zsh-Completion
+    fi
+    zgen oh-my-zsh plugins/git
+    if (( $+commands[packer-io] )) ; then
+        zgen load gunzy83/packer-zsh-completion
+    fi
+    if (( $+commands[rvm] )) ; then
+        zgen oh-my-zsh plugins/rvm
+    fi
+    if (( $+commands[vagrant] )) ; then
+        zgen oh-my-zsh plugins/vagrant
+    fi
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zsh-users/zsh-history-substring-search
+
+    # completions
+    zgen load zsh-users/zsh-completions src
+
+    # save all to init script
+    zgen save
+fi
+source ~/.zsh/gunzy.zsh-theme
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

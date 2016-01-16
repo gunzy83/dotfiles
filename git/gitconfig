@@ -1,0 +1,14 @@
+[user]
+        name = Ross Williams
+        email = gunzy83au@gmail.com
+[core]
+        editor = vim
+        filemode = false
+[credential]
+        helper = cache --timeout=3600
+[color]
+        ui = auto
+[push]
+        default = simple
+[alias]
+        tree = log --graph --decorate --pretty=oneline --abbrev-commit
