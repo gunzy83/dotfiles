@@ -4,6 +4,7 @@ dotfiles:
   dirs:
     - path: "~/.zsh"
     - path: "~/.zsh/alias"
+    - path: "~/.zsh/function"
     - path: "~/.zgen"
     - path: "~/.vim"
     - path: "~/.vim/bundle"
@@ -25,6 +26,9 @@ dotfiles:
       mode: "0644"
     - src: "zsh/alias.zsh"
       dest: "~/.zsh/alias/alias.zsh"
+      mode: "0644"
+    - src: "zsh/functions.zsh"
+      dest: "~/.zsh/function/functions.zsh"
       mode: "0644"
     - src: "zsh/arch.zsh"
       dest: "~/.zsh/alias/arch.zsh"
