@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Detect the OS
+source .zsh/os_detect.sh
+
 # Set up dircolors for GNU ls
 eval `dircolors ~/.dircolors`
 
