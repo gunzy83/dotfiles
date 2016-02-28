@@ -17,7 +17,7 @@ dotfiles:
     - src: "zsh/zshrc"
       dest: "~/.zshrc"
       mode: "0644"
-      post_command: "zgen update"
+      post_command: "zgen update && source ~/.zshrc"
     - src: "zsh/gunzy.zsh-theme"
       dest: "~/.zsh/gunzy.zsh-theme"
       mode: "0644"
