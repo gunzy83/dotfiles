@@ -1,7 +1,6 @@
 ---
-
 dotfiles:
-  
+  # Directory listing
   dirs:
     - path: "~/.zsh"
     - path: "~/.zsh/alias"
@@ -12,7 +11,7 @@ dotfiles:
     - path: "~/.config/quassel-irc.org"
     - path: "~/.bundle"
     - path: "~/.local/share/konsole"
-  
+  # Files to deploy
   files:
     - src: "zsh/zshrc"
       dest: "~/.zshrc"
@@ -69,6 +68,3 @@ dotfiles:
     - src: "konsole/Shell.profile"
       dest: "~/.local/share/konsole/Shell.profile"
       mode: "0600"
-
-  post_commands:
-    - 
