@@ -12,6 +12,7 @@ dotfiles:
     - path: "~/.config/quassel-irc.org"
     - path: "~/.bundle"
     - path: "~/.local/share/konsole"
+    - path: "~/.kde4/share/apps/konsole"
   # Files to deploy
   files:
     - src: "zsh/zshrc"
@@ -71,4 +72,10 @@ dotfiles:
       mode: "0644"
     - src: "konsole/Shell.profile"
       dest: "~/.local/share/konsole/Shell.profile"
+      mode: "0600"
+    - src: "konsole/base16-monokai.colorscheme"
+      dest: "~/.kde4/share/apps/konsole/base16-monokai.colorscheme"
+      mode: "0644"
+    - src: "konsole/Shell.profile"
+      dest: "~/.kde4/share/apps/konsole/Shell.profile"
       mode: "0600"
