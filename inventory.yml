@@ -52,6 +52,7 @@ dotfiles:
     - src: "vim/vimrc"
       dest: "~/.vimrc"
       mode: "0644"
+      post_command: "vim +PluginInstall +qall"
     - src: "vim/Vundle.vim"
       dest: "~/.vim/bundle/Vundle.vim"
       mode: "0755"  
