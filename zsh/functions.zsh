@@ -52,3 +52,13 @@ packer() {
         packer "$@"
     fi
 }
+
+whatprovides() {
+    if [ $DIST = "arch" ] ; then
+        pkgfile "$@"
+    elif [ $DIST = "debian" ] ; then
+	dpkg -S "$@"
+    else
+	echo "whatprovides: unknown distribution"
+    fi
+}
