@@ -43,3 +43,12 @@ fs() {
         du $arg .[^.]* *
     fi
 }
+
+packer() {
+    if [ $DIST = "arch" ] ; then
+        # Use packer from packer.io instead of the packer AUR helper
+        packer-io "$@"
+    else
+        packer "$@"
+    fi
+}
