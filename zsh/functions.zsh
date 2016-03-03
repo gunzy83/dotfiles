@@ -57,8 +57,22 @@ whatprovides() {
     if [ $DIST = "arch" ] ; then
         pkgfile "$@"
     elif [ $DIST = "debian" ] ; then
-	dpkg -S "$@"
+        dpkg -S "$@"
     else
-	echo "whatprovides: unknown distribution"
+        echo "whatprovides: unknown distribution"
     fi
+}
+
+provideswhat() {
+    if [ $DIST = "arch" ] ; then
+        pacman -Ql "$@"
+    elif [ $DIST = "debian" ] ; then
+        dpkg-query -L "$@"
+    else
+        echo "provideswhat: unknown distribution"
+    fi
+}
+
+ipinfo() {
+    curl http://ipinfo.io/"$@";
 }
