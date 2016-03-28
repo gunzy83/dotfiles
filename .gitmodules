@@ -4,3 +4,6 @@
 [submodule "vim/Vundle.vim"]
 	path = vim/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "pyenv"]
+	path = pyenv
+	url = https://github.com/yyuu/pyenv.git
