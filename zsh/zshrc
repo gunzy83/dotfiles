@@ -67,10 +67,16 @@ fi
 source ~/.zsh/gunzy.zsh-theme
 
 # Source aliases
-source ~/.zsh/alias/*.zsh
+if [ -e ~/.zsh/alias/*.zsh ];
+then
+    source ~/.zsh/alias/*.zsh
+fi
 
 # Source functions
-source ~/.zsh/function/*.zsh
+if [ -e ~/.zsh/function/*.zsh ];
+then
+    source ~/.zsh/function/*.zsh
+fi
 
 # Temporarily include this until I work out where to put it
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

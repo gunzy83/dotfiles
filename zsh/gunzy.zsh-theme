@@ -27,7 +27,10 @@
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
-SEGMENT_SEPARATOR='⮀'
+SEGMENT_SEPARATOR='\ue0b0'
+BRANCH="\ue0a0"
+SYMBOL="\u03A9"
+ROOT="\u2622"
 
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
@@ -64,11 +67,11 @@ prompt_context() {
   local user=`whoami`
 
   if [[ $UID -eq 0 ]]; then
-    prompt_segment black red "%(!.%{%F{red}%}.)Δ $user@%m"
+    prompt_segment black red "%(!.%{%F{red}%}.)$ROOT $user@%m"
   elif [[ -n "$SSH_CLIENT" ]]; then
-    prompt_segment black yellow "%(!.%{%F{yellow}%}.)Δ $user@%m"
+    prompt_segment black yellow "%(!.%{%F{yellow}%}.)$SYMBOL $user@%m"
   else
-    prompt_segment black green "%(!.%{%F{green}%}.)Δ %m"
+    prompt_segment black green "%(!.%{%F{green}%}.)$SYMBOL %m"
   fi
 }
 
@@ -95,7 +98,7 @@ prompt_git() {
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats '%u%c'
     vcs_info
-    echo -n "${ref/refs\/heads\//⭠ }${vcs_info_msg_0_}"
+    echo -n "${ref/refs\/heads\//$BRANCH }${vcs_info_msg_0_}"
   fi
 }
 
