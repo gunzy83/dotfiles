@@ -9,11 +9,6 @@
 # In order for this theme to render correctly, you will need a
 # [Powerline-patched font](https://gist.github.com/1595572).
 #
-# In addition, I recommend the
-# [Solarized theme](https://github.com/altercation/solarized/) and, if you're
-# using it on Mac OS X, [iTerm 2](http://www.iterm2.com/) over Terminal.app -
-# it has significantly better color fidelity.
-#
 # # Goals
 #
 # The aim of this theme is to only show you *relevant* information. Like most
@@ -27,10 +22,21 @@
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
+PRIMARY_FG=black
+
 SEGMENT_SEPARATOR='\ue0b0'
-BRANCH="\ue0a0"
-SYMBOL="\u03A9"
+
+GIT_BRANCH="\ue0a0"
+GIT_DETACHED="\u27a6"
+GIT_STAGED="\u271a"
+GIT_UNSTAGED="\u25cf"
+GIT_PROMPT_AHEAD="\u2191"
+GIT_PROMPT_BEHIND="\u2193"
+
 ROOT="\u2622"
+PYTHON="\u223F"
+ERROR="\u2718"
+GEAR="\u2699"
 
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
@@ -51,7 +57,7 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
   else
     echo -n "%{%k%}"
   fi
@@ -67,24 +73,26 @@ prompt_context() {
   local user=`whoami`
 
   if [[ $UID -eq 0 ]]; then
-    prompt_segment black red "%(!.%{%F{red}%}.)$ROOT $user@%m"
+    prompt_segment $PRIMARY_FG red "%(!.%{%F{red}%}.)$ROOT $user@%m"
   elif [[ -n "$SSH_CLIENT" ]]; then
-    prompt_segment black yellow "%(!.%{%F{yellow}%}.)$SYMBOL $user@%m"
+    prompt_segment $PRIMARY_FG yellow "%(!.%{%F{yellow}%}.)$user@%m"
   else
-    prompt_segment black green "%(!.%{%F{green}%}.)$SYMBOL %m"
+    prompt_segment $PRIMARY_FG green "%(!.%{%F{green}%}.)%m"
   fi
 }
 
 # Git: branch/detached head, dirty status
 prompt_git() {
   local ref dirty
+  is_dirty() {
+    test -n "$(git status --porcelain --ignore-submodules)"
+  }
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    dirty=$(parse_git_dirty)
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
-    if [[ -n $dirty ]]; then
-      prompt_segment yellow black
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="$GIT_DETACHED $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
+    if is_dirty; then
+      prompt_segment yellow $PRIMARY_FG
     else
-      prompt_segment green black
+      prompt_segment green $PRIMARY_FG
     fi
 
     setopt promptsubst
@@ -93,53 +101,45 @@ prompt_git() {
     zstyle ':vcs_info:*' enable git
     zstyle ':vcs_info:*' get-revision true
     zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' stagedstr '✚'
-    zstyle ':vcs_info:git:*' unstagedstr '●'
-    zstyle ':vcs_info:*' formats ' %u%c'
+    zstyle ':vcs_info:*' stagedstr "$GIT_STAGED"
+    zstyle ':vcs_info:*:*' unstagedstr "$GIT_UNSTAGED"
+    zstyle ':vcs_info:*:*' formats ' %u%c '
     zstyle ':vcs_info:*' actionformats '%u%c'
     vcs_info
-    echo -n "${ref/refs\/heads\//$BRANCH }${vcs_info_msg_0_}"
+    echo -n "${ref/refs\/heads\//$GIT_BRANCH }${vcs_info_msg_0_}$(git_remote_status)"
   fi
 }
 
-prompt_hg() {
-  local rev status
-  if $(hg id >/dev/null 2>&1); then
-    if $(hg prompt >/dev/null 2>&1); then
-      if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
-        # if files are not added
-        prompt_segment red white
-        st='±'
-      elif [[ -n $(hg prompt "{status|modified}") ]]; then
-        # if any modification
-        prompt_segment yellow black
-        st='±'
-      else
-        # if working copy is clean
-        prompt_segment green black
-      fi
-      echo -n $(hg prompt "⭠ {rev}@{branch}") $st
-    else
-     st=""
-      rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
-      branch=$(hg id -b 2>/dev/null)
-      if `hg st | grep -Eq "^\?"`; then
-        prompt_segment red black
-        st='±'
-      elif `hg st | grep -Eq "^(M|A)"`; then
-        prompt_segment yellow black
-        st='±'
-      else
-        prompt_segment green black
-      fi
-      echo -n "⭠ $rev@$branch" $st
+git_remote_status() {
+    local remote ahead behind git_remote_status
+    remote=${$(command git rev-parse --verify ${hook_com[branch]}@{upstream} --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+    if [[ -n ${remote} ]]; then
+        ahead=$(command git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+        behind=$(command git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+
+        if [[ $ahead -eq 0 ]] && [[ $behind -eq 0 ]]; then
+            git_remote_status=""
+        elif [[ $ahead -gt 0 ]] && [[ $behind -eq 0 ]]; then
+            git_remote_status="$GIT_PROMPT_AHEAD$((ahead)) "
+        elif [[ $behind -gt 0 ]] && [[ $ahead -eq 0 ]]; then
+            git_remote_status="$GIT_PROMPT_BEHIND$((behind)) "
+        elif [[ $ahead -gt 0 ]] && [[ $behind -gt 0 ]]; then
+            git_remote_status="$GIT_PROMPT_AHEAD$((ahead))$GIT_PROMPT_BEHIND$((behind)) "
+        fi
+        echo $git_remote_status
     fi
+}
+
+prompt_pyenv() {
+  if which pyenv &> /dev/null; then
+    version="$(pyenv version | sed -e 's/ (set.*$//' | tr '\n' ' ' | sed 's/.$//')"
+    [[ $version != system ]] && prompt_segment white black "$PYTHON $version"
   fi
 }
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue black '%~'
+  prompt_segment blue $PRIMARY_FG '%~'
 }
 
 # Status:
@@ -149,25 +149,38 @@ prompt_dir() {
 prompt_status() {
   local symbols
   symbols=()
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{red}%}⚡"
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}$ERROR "
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}$GEAR "
+
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 
 ## Main prompt
-build_prompt() {
+prompt_gunzy_main() {
   RETVAL=$?
+  CURRENT_BG='NONE'
   if [ $TERM = "xterm-256color" ]; then
         prompt_status
         prompt_context
+        prompt_pyenv
         prompt_dir
         prompt_git
-        prompt_hg
         prompt_end
   else
         echo -n "%n@%m $"
   fi
 }
 
-PROMPT='%{%f%b%k%}$(build_prompt) '
+prompt_gunzy_precmd() {
+  PROMPT='%{%f%b%k%}$(prompt_gunzy_main) '
+}
+
+prompt_gunzy_setup() {
+  autoload -Uz add-zsh-hook
+
+  prompt_opts=(cr subst percent)
+
+  add-zsh-hook precmd prompt_gunzy_precmd
+}
+
+prompt_gunzy_setup "$@"

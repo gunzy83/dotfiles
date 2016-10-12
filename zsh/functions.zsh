@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Add a file to the given dotfiles repo, symlink, and return ansible variable string
-dotfile-add() {    
+dotfile-add() {
     FILE_REL_PATH=${$(realpath $1)#$HOME/}
     REPO_REL_PATH=${$(realpath $2)#$HOME/}
     FILE_IN_REPO=$3
