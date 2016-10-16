@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+hooks_pre_commit="${HOME}/.git/hooks/pre-commit.d/"
+
+for hook in ${hooks_pre_commit}*; do
+    "$hook"
+done

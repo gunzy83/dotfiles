@@ -133,7 +133,7 @@ git_remote_status() {
 prompt_pyenv() {
   if which pyenv &> /dev/null; then
     version="$(pyenv version | sed -e 's/ (set.*$//' | tr '\n' ' ' | sed 's/.$//')"
-    [[ $version != system ]] && prompt_segment white black "$PYTHON $version"
+    [[ $version != system && $version != "" ]] && prompt_segment white black "$PYTHON $version"
   fi
 }
 

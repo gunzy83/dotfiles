@@ -10,3 +10,6 @@
 [submodule "pyenv-virtualenv"]
 	path = pyenv-virtualenv
 	url = https://github.com/yyuu/pyenv-virtualenv.git
+[submodule "git-passport"]
+	path = git-passport
+	url = git://github.com/frace/git-passport.git

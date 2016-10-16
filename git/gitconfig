@@ -16,3 +16,9 @@
 	submoduleSummary = true
 [diff]
 	submodule = log
+
+[alias]
+    passport = !${HOME}/.git/hooks/bin/git-passport/git-passport.py
+
+[init]
+    templatedir = ~/.git/templates
