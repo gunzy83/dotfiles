@@ -84,3 +84,7 @@ dotfiles:
   - src: "konsole/Shell.profile"
     dest: "~/.kde/share/apps/konsole/Shell.profile"
     mode: "0600"
+  - src: "fonts"
+    dest: "~/.fonts"
+    mode: "0755"
+    post_command: "fc-cache -vf ~/.fonts"
