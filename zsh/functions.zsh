@@ -56,8 +56,8 @@ packer() {
 whatprovides() {
     if [ $DIST = "arch" ] ; then
         pkgfile "$@"
-    elif [ $DIST = "debian" ] ; then
-        dpkg -S "$@"
+    elif [ $DIST = "debian" ] || [ $DIST = "\"elementary\"" ] ; then
+        apt-file search "$@"
     else
         echo "whatprovides: unknown distribution"
     fi
@@ -66,13 +66,19 @@ whatprovides() {
 provideswhat() {
     if [ $DIST = "arch" ] ; then
         pacman -Ql "$@"
-    elif [ $DIST = "debian" ] ; then
+    elif [ $DIST = "debian" ] || [ $DIST = "\"elementary\"" ] ; then
         dpkg-query -L "$@"
     else
         echo "provideswhat: unknown distribution"
     fi
 }
 
+# Get information about an IP address. When left blank, information about current public IP is returned
 ipinfo() {
     curl http://ipinfo.io/"$@";
+}
+
+# Generate a password. Length is 20 unless specified.
+passwordgen() {
+    tr -cd '[:alnum:]' < /dev/urandom | fold -w${@:-20} | head -n1
 }
