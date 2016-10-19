@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Source environment
-if [ -e ~/.zsh/env/*.zsh ];
-then
-	source ~/.zsh/env/*.zsh
-fi
+envs_chk=(~/.zsh/function/*.zsh(N))
+for file in $envs_chk; do
+	source $file
+done

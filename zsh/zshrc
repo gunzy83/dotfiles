@@ -34,6 +34,9 @@ if ! zgen saved; then
     if (( $+commands[docker] )) ; then
         zgen oh-my-zsh plugins/docker
     fi
+    if (( $+commands[docker-compose] )) ; then
+        zgen oh-my-zsh plugins/docker-compose
+    fi
     if (( $+commands[gem] )) ; then
         zgen oh-my-zsh plugins/gem
     fi
@@ -68,16 +71,18 @@ fi
 source ~/.zsh/gunzy.zsh-theme
 
 # Source aliases
-if [ -e ~/.zsh/alias/*.zsh ];
-then
-    source ~/.zsh/alias/*.zsh
-fi
+alias_chk=(~/.zsh/alias/*.zsh(N))
+for file in $alias_chk; do
+    source $file
+done
 
 # Source functions
-if [ -e ~/.zsh/function/*.zsh ];
-then
-    source ~/.zsh/function/*.zsh
-fi
+funcs_chk=(~/.zsh/function/*.zsh(N))
+for file in $funcs_chk; do
+    source $file
+done
+
+autoload -Uz compinit && compinit -i
 
 # Temporarily include this until I work out where to put it
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
