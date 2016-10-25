@@ -40,3 +40,5 @@ alias mv='mv -i'
 # untar
 alias untar='tar xvf'
 
+alias json2yaml='python ~/.scripts/json2yaml.py'
+

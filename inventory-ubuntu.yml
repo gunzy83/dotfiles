@@ -88,3 +88,6 @@ dotfiles:
     dest: "~/.fonts"
     mode: "0755"
     post_command: "fc-cache -vf ~/.fonts"
+  - src: "scripts/json2yaml.py"
+    dest: "~/.scripts/json2yaml.py"
+    mode: "0644"
