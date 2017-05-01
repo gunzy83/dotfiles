@@ -1,0 +1,6 @@
+---
+- name: Install Dotfiles
+  hosts: all
+
+  roles:
+    - role: gunzy83.dotfiles

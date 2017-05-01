@@ -1,0 +1,4 @@
+# requirements pinned here
+ansible==2.2.0.0
+invoke==0.13.0
+pip-tools==1.8.0

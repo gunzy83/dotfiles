@@ -16,3 +16,4 @@ TerminalRows=39
 
 [Terminal Features]
 BlinkingCursorEnabled=true
+BlinkingTextEnabled=true
