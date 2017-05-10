@@ -33,7 +33,5 @@ invoke sync_roles
 echo "Installing dotfiles"
 invoke install
 
-echo "Run the following command to apply zsh configuration:"
-echo ""
-echo "source ~/.zshrc"
+echo "Update the shell config"
 source ~/.zshrc
