@@ -44,7 +44,7 @@ if ! zgen saved; then
         zgen load bogwonch/Geeknote-Zsh-Completion
     fi
     zgen oh-my-zsh plugins/git
-    if (( $+commands[packer-io] )) ; then
+    if (( $+commands[packer-io] )) || (( $+commands[packer-bin] )) ; then
         zgen load gunzy83/packer-zsh-completion
     fi
     if (( $+commands[rvm] )) ; then
@@ -53,6 +53,7 @@ if ! zgen saved; then
     if (( $+commands[vagrant] )) ; then
         zgen oh-my-zsh plugins/vagrant
     fi
+
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-history-substring-search
 

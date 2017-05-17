@@ -18,7 +18,7 @@ set wildmenu
 
 set showcmd
 set autowrite
-set hidden  
+set hidden
 
 set history=1000
 set scrolloff=5
@@ -36,6 +36,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
+Plugin 'ConradIrwin/vim-bracketed-paste'
 
 call vundle#end()
 filetype plugin indent on

@@ -49,7 +49,7 @@ packer() {
         # Use packer from packer.io instead of the packer AUR helper
         packer-io "$@"
     else
-        packer "$@"
+        packer-bin "$@"
     fi
 }
 
