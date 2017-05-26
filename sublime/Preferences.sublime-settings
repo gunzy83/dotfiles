@@ -1,5 +1,22 @@
 {
-	"color_scheme": "Packages/Theme - Elementary/schemes/Monokai Extended Bright.tmTheme",
+	"binary_file_patterns":
+	[
+		"node_modules/",
+		"*.jpg",
+		"*.jpeg",
+		"*.png",
+		"*.gif",
+		"*.ttf",
+		"*.tga",
+		"*.dds",
+		"*.ico",
+		"*.eot",
+		"*.pdf",
+		"*.swf",
+		"*.jar",
+		"*.zip"
+	],
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"font_face": "Source Code Pro",
 	"font_size": 10,
 	"ignored_packages":
@@ -11,6 +28,5 @@
 		"draw_normal",
 		"draw_active"
 	],
-	"binary_file_patterns": ["node_modules/", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip"],
 	"theme": "Elementary Dark.sublime-theme"
 }

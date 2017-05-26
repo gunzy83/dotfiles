@@ -1,21 +1,27 @@
 #!/bin/zsh
 
+echo "Inititalising submodules..."
+git submodule init
+git submodule update
+
 echo "Linking pyenv and pyenv-virtualenv..."
-ln -sf pyenv ~/.pyenv
-ln -sf pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
+ln -sf $(pwd)/pyenv ~/.pyenv
+ln -sf $(pwd)/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
 
 echo "Preparing pyenv in the current shell"
 source zsh/pyenv.zsh
 
 echo "Installing python version 2.7.11 with pyenv"
+CFLAGS=-I/usr/include/openssl-1.0 \
+LDFLAGS=-L/usr/lib64/openssl-1.0 \
 pyenv install 2.7.11 -s
 
 echo "Creating virtualenv for dotfiles"
 pyenv virtualenv 2.7.11 dotfiles
 
 echo "Activating the virtualenv and adding .python-version file"
-echo "dotfiles" > .python-version
 pyenv activate dotfiles
+echo "dotfiles" > .python-version
 
 echo "Installing requirements for dotfiles"
 # Silence gcc warnings when compiling native extensions

@@ -1,7 +1,7 @@
 - src: "zsh/zshrc"
   dest: "~/.zshrc"
   mode: "0644"
-  post_command: "zgen update && source ~/.zshrc"
+  post_command: "source ~/.zgen/zgen.zsh && zgen update && source ~/.zshrc"
 - src: "zsh/zshenv"
   dest: "~/.zshenv"
   mode: "0644"
@@ -84,6 +84,6 @@
   dest: "~/.scripts/json2yaml.py"
   mode: "0644"
 - src: "sublime"
-  dest: "~/.config/sublime-text-3"
+  dest: "~/.config/sublime-text-3/Packages/User"
   mode: "0600"
   post_command: wget https://packagecontrol.io/Package%20Control.sublime-package -P ~/.config/sublime-text-3/Installed\ Packages/

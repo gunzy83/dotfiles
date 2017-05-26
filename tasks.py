@@ -171,7 +171,6 @@ def create_full_repo_path(repo_path):
 def get_repo_location():
     return os.path.dirname(os.path.realpath(__file__))
 
-
 def _check_virtual_env():
     if not os.getenv("PYENV_VIRTUAL_ENV"):
         print("Error: Not running inside a virtualenv. Exiting...")
