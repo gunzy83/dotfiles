@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+export DOTFILES_DIR=$(dirname $(dirname $(readlink $0)))
+
 # Detect the OS
 source ~/.zsh/os_detect.sh
 
