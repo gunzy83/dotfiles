@@ -15,7 +15,7 @@ from invoke import task, Collection
 def sync_roles(ctx):
     _check_virtual_env()
 
-    command = "$PYENV_VIRTUAL_ENV/bin/ansible-galaxy install --role-file roles.yml"
+    command = "$PYENV_VIRTUAL_ENV/bin/ansible-galaxy install --force --role-file roles.yml"
     result = ctx.run(command, pty=True)
 
 
@@ -41,7 +41,7 @@ def add_dotfile(ctx, src_path, repo_path, incl_mode=True, post_command=None):
         repo_path = repo_path if not repo_path.endswith('/') else repo_path.rstrip('/')
     else:
         repo_path = repo_path if not repo_path.endswith('/') else repo_path + os.path.basename(src_path)
-    
+
     mode = oct(os.stat(src_path)[stat.ST_MODE])[-4:] if incl_mode else None
 
     if get_matching_entries(dest=src_path):
@@ -55,7 +55,7 @@ def add_dotfile(ctx, src_path, repo_path, incl_mode=True, post_command=None):
             delete_path()
     else:
         move_path_to_repo(src_path, repo_path)
-    
+
     add_to_inventory(repo_path,src_path,mode,post_command)
 
 
@@ -118,7 +118,7 @@ def read_current_inventory():
                 print("Error: Inventory is not valid yaml.")
                 exit(3)
     except EnvironmentError:
-        return []    
+        return []
 
 
 def write_updated_inventory(inventory):
@@ -129,7 +129,7 @@ def write_updated_inventory(inventory):
             inventory_file.write( dump )
     except EnvironmentError:
         return []
-        
+
 
 def move_path_to_repo(src_path, repo_path):
     print("Moving and symlinking...")

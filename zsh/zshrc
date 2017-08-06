@@ -90,4 +90,7 @@ autoload -Uz compinit && compinit -i
 # Temporarily include this until I work out where to put it
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source /usr/share/nvm/init-nvm.sh
+
+if [[ -e "/usr/share/nvm/init-nvm.sh" ]] ; then
+    source /usr/share/nvm/init-nvm.sh
+fi
