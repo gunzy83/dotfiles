@@ -88,5 +88,5 @@
   mode: "0600"
   post_command: "wget https://packagecontrol.io/Package%20Control.sublime-package -P ~/.config/sublime-text-3/Installed\\ Packages/"
 - src: "invoke/_invoke"
-  dest: "/home/gunzy/.zsh/completions/_invoke"
+  dest: "~/.zsh/completions/_invoke"
   mode: "0644"

@@ -95,8 +95,8 @@ def add_to_inventory(src, dest, mode, post_command=None):
     print("Adding entry to inventory...")
     inventory = read_current_inventory()
     item = OrderedDict()
-    item["src"] = src
-    item["dest"] = dest
+    item["src"] = relative_home(src)
+    item["dest"] = relative_home(dest)
     if mode:
         item["mode"] = mode
     if post_command:
@@ -151,6 +151,8 @@ def move_path_to_repo(src_path, repo_path):
 
 
 def restore_path(src, dest):
+    src = full_home(src)
+    dest = full_home(dest)
     full_repo_path = create_full_repo_path(src)
     delete_path(dest)
     os.rename(full_repo_path, dest)
@@ -167,6 +169,16 @@ def ask_choice(question):
     print(question)
     choice = raw_input('[Y/n]> ')
     return choice in ['Y','y','']
+
+
+def relative_home(path):
+    home_path = os.getenv("HOME")
+    return path.replace(home_path, '~', 1)
+
+
+def full_home(path):
+    home_path = os.getenv("HOME")
+    return path.replace('~', home_path, 1)
 
 
 def dump_to_yaml(data):
