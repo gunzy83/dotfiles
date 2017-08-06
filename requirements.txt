@@ -14,14 +14,16 @@ idna==2.1                 # via cryptography
 invoke==0.13.0
 ipaddress==1.0.17         # via cryptography
 jinja2==2.8               # via ansible
-MarkupSafe==0.23          # via jinja2
+markupsafe==0.23          # via jinja2
+onetimepass==1.0.1
 paramiko==2.0.2           # via ansible
 pip-tools==1.8.0
+pyaml==17.7.2
 pyasn1==0.1.9             # via cryptography, paramiko
 pycparser==2.17           # via cffi
 pycrypto==2.6.1           # via ansible
-PyYAML==3.12              # via ansible
-six==1.10.0               # via cryptography, pip-tools
+pyyaml==3.12              # via ansible, pyaml
+six==1.10.0               # via cryptography, onetimepass, pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools                # via ansible, cryptography
