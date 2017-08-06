@@ -85,6 +85,12 @@ for file in $funcs_chk; do
     source $file
 done
 
+# Source completions
+completion_chk=(~/.zsh/completions/_*(N))
+for file in $completion_chk; do
+    source $file
+done
+
 autoload -Uz compinit && compinit -i
 
 # Temporarily include this until I work out where to put it

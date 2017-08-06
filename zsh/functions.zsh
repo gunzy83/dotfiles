@@ -1,23 +1,33 @@
 #!/bin/zsh
 
-# Add a file to the given dotfiles repo, symlink, and return ansible variable string
-dotfile-add() {
-    FILE_REL_PATH=${$(realpath $1)#$HOME/}
-    REPO_REL_PATH=${$(realpath $2)#$HOME/}
-    FILE_IN_REPO=$3
-    MODE=$(stat -c "%a" ~/$FILE_REL_PATH)
+# Add a file to the dotfiles repo
+add-dotfile() {
+    curr_dir=$(pwd)
+    cd $DOTFILES_DIR
+    if [[ -z $1 ||  -z $2 ]]; then
+        echo "Usage: add-dotfile <src path> <repo path> [<post command>]"
+        cd $curr_dir
+        return 1
+    fi
+    post_command=""
+    if [[ $3 ]]; then
+        post_command="-p '$3'"
+    fi
+    eval "invoke add_dotfile -s $1 -r $2 $post_command"
+    cd $curr_dir
+}
 
-    mkdir -p $(dirname ~/$REPO_REL_PATH/$FILE_IN_REPO)
-    mv ~/$FILE_REL_PATH ~/$REPO_REL_PATH/$FILE_IN_REPO
-    echo "Moved ~/$FILE_REL_PATH to ~/$REPO_REL_PATH/$FILE_IN_REPO"
-    echo ""
-    ln -s ~/$REPO_REL_PATH/$FILE_IN_REPO ~/$FILE_REL_PATH
-    echo "Moved ~/$FILE_REL_PATH to ~/$REPO_REL_PATH/$FILE_IN_REPO"
-    echo ""
-    echo "Ansible variable string:"
-    echo "  - src: \"$FILE_IN_REPO\""
-    echo "    dest: \"~/$FILE_REL_PATH\""
-    echo "    mode: \"0$MODE\""
+# remove a file to the dotfiles repo
+remove-dotfile() {
+    curr_dir=$(pwd)
+    cd $DOTFILES_DIR
+    if [[ -z $1 ]]; then
+        echo "Usage: remove-dotfile <src path>"
+        cd $curr_dir
+        return 1
+    fi
+    eval "invoke remove_dotfile -p $1 -r"
+    cd $curr_dir
 }
 
 # Run `dig` and display the most useful info
