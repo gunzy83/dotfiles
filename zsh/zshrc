@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-export DOTFILES_DIR=$(dirname $(dirname $(readlink $0)))
+export DOTFILES_DIR=$(dirname $(dirname $(readlink ~/.zshrc )))
 
 # Detect the OS
 source ~/.zsh/os_detect.sh
@@ -90,3 +90,4 @@ autoload -Uz compinit && compinit -i
 # Temporarily include this until I work out where to put it
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source /usr/share/nvm/init-nvm.sh

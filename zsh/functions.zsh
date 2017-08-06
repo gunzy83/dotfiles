@@ -82,3 +82,7 @@ ipinfo() {
 passwordgen() {
     tr -cd '[:alnum:]' < /dev/urandom | fold -w${@:-20} | head -n1
 }
+
+create-virtualenv() {
+    pyenv virtualenv 2.7.11 $1 && pyenv activate $1 && pip install -r requirements.txt && pyenv deactivate $1 && echo $1 > .python-version
+}

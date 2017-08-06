@@ -21,4 +21,7 @@
     passport = !${HOME}/.git/hooks/bin/git-passport/git-passport.py
 
 [init]
-    templatedir = ~/.git/templates
+	templatedir = ~/.git/templates
+
+[alias]
+	sync = "!f(){ git fetch ${1:-origin} && git rebase ${1:-origin}/master; };f"
