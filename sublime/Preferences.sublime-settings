@@ -18,7 +18,7 @@
 	],
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"font_face": "Source Code Pro",
-	"font_size": 11,
+	"font_size": 12,
 	"ignored_packages":
 	[
 		"Vintage"
@@ -28,5 +28,7 @@
 		"draw_normal",
 		"draw_active"
 	],
-	"theme": "Elementary Dark.sublime-theme"
+	"tab_size": 4,
+	"theme": "Elementary Dark.sublime-theme",
+	"translate_tabs_to_spaces": false
 }

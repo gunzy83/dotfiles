@@ -25,3 +25,6 @@
 
 [alias]
 	sync = "!f(){ git fetch ${1:-origin} && git rebase ${1:-origin}/master; };f"
+
+[alias]
+    newbranch = "!f(){ if [[ -z $@ ]]; then echo 'Usage: git newbranch <branch_name>'; else git checkout master && git sync && git checkout -b $@; fi; };f"

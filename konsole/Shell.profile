@@ -2,7 +2,9 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=base16-monokai
-Font=Source Code Pro,10,-1,5,50,0,0,0,0,0,Regular
+Font=SauceCodePro Nerd Font Mono,10,-1,5,50,0,0,0,0,0,Regular
+LineSpacing=0
+UseFontLineChararacters=false
 
 [Encoding Options]
 DefaultEncoding=UTF-8
@@ -18,5 +20,6 @@ TerminalRows=39
 HistorySize=10000
 
 [Terminal Features]
+BidiRenderingEnabled=true
 BlinkingCursorEnabled=true
 BlinkingTextEnabled=true

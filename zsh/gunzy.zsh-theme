@@ -26,17 +26,17 @@ PRIMARY_FG=black
 
 SEGMENT_SEPARATOR='\ue0b0'
 
-GIT_BRANCH="\ue0a0"
-GIT_DETACHED="\u27a6"
-GIT_STAGED="\u271a"
-GIT_UNSTAGED="\u25cf"
+GIT_BRANCH="\ue725"
+GIT_DETACHED="\ue729"
+GIT_STAGED="\uf067"
+GIT_UNSTAGED="\uf111"
 GIT_PROMPT_AHEAD="\u2191"
 GIT_PROMPT_BEHIND="\u2193"
 
 ROOT="\u2622"
-PYTHON="\u223F"
-ERROR="\u2718"
-GEAR="\u2699"
+PYTHON="\ue606"
+ERROR="\ue009"
+GEAR="\uf013"
 
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
