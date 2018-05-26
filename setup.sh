@@ -5,15 +5,13 @@ git submodule init
 git submodule update
 
 echo "Linking pyenv and pyenv-virtualenv..."
-ln -sf $(pwd)/pyenv ~/.pyenv
-ln -sf $(pwd)/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
+ln -sfn $(pwd)/pyenv ~/.pyenv
+ln -sfn $(pwd)/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
 
 echo "Preparing pyenv in the current shell"
 source zsh/pyenv.zsh
 
 echo "Installing python version 2.7.11 with pyenv"
-CFLAGS=-I/usr/include/openssl-1.0 \
-LDFLAGS=-L/usr/lib64/openssl-1.0 \
 pyenv install 2.7.11 -s
 
 echo "Creating virtualenv for dotfiles"

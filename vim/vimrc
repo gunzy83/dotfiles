@@ -12,6 +12,7 @@ set linebreak
 set autoindent
 set smartindent
 set showtabline=1
+set nobackup
 
 set wildmode=longest,list
 set wildmenu
