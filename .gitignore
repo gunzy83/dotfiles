@@ -2,4 +2,4 @@
 .python-version
 .history.yml
 *.merged-ca-bundle
-
+.uuid
