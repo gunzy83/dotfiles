@@ -92,6 +92,7 @@ The following git submodules are included:
 * [Vundle.vim](https://github.com/VundleVim/Vundle.vim) (pinned at 0.9.1)
 * [zgen](https://github.com/tarjoilija/zgen)
 * [git-passport](https://github.com/frace/git-passport)
+* [tfenv](https://github.com/Zordrak/tfenv.git) (pinned at v0.6.0)
 
 License
 -------

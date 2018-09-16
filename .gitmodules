@@ -13,3 +13,6 @@
 [submodule "git-passport"]
 	path = git-passport
 	url = git://github.com/frace/git-passport.git
+[submodule "tfenv"]
+	path = tfenv
+	url = https://github.com/Zordrak/tfenv.git
