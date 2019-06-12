@@ -17,6 +17,8 @@
 		"*.zip"
 	],
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"default_browser": "chrome",
+	"ensure_newline_at_eof_on_save": true,
 	"font_face": "Source Code Pro",
 	"font_size": 12,
 	"ignored_packages":
@@ -30,6 +32,5 @@
 	],
 	"tab_size": 4,
 	"theme": "Elementary Dark.sublime-theme",
-	"translate_tabs_to_spaces": false,
-	"ensure_newline_at_eof_on_save": true
+	"translate_tabs_to_spaces": false
 }
