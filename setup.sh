@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 echo "Inititalising submodules..."
-#git submodule init
-#git submodule update
+git submodule init
+git submodule update
 
 echo "Linking pyenv and pyenv-virtualenv..."
 ln -sfn $(pwd)/pyenv ~/.pyenv

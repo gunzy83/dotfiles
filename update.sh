@@ -3,6 +3,7 @@ echo "Syncing with remote..."
 git sync
 
 echo "Updating submodules..."
+git submodule init
 git submodule update
 
 echo "Updating requirements for dotfiles"
