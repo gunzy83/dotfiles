@@ -10,8 +10,9 @@ Requirements
 
 These files have only been tested on:
 
+* Solus
+* Ubuntu 15.04-18.04 based distributions
 * Arch Linux
-* Ubuntu 15.04-16.04 based distributions
 
 Some of these files will do anything without the apps they are intended to configure. Ensure the following are installed before or after:
 
@@ -38,6 +39,12 @@ Update the dotfiles from upstream and install:
 
 ```
 ./update.sh
+```
+
+Upgrade all the submodule contents and refresh shell config:
+
+```
+./upgrade.sh
 ```
 
 List invoke options:
@@ -87,12 +94,13 @@ Extra Notes:
 
 The following git submodules are included:
 
-* [pyenv](https://github.com/pyenv/pyenv) (pinned at v1.0.10)
-* [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) (pinned at v1.0.0)
-* [Vundle.vim](https://github.com/VundleVim/Vundle.vim) (pinned at 0.9.1)
+* [pyenv](https://github.com/pyenv/pyenv)
+* [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
+* [pyenv-default-packages](https://github.com/jawshooah/pyenv-default-packages)
+* [Vundle.vim](https://github.com/VundleVim/Vundle.vim)
 * [zgen](https://github.com/tarjoilija/zgen)
 * [git-passport](https://github.com/frace/git-passport)
-* [tfenv](https://github.com/Zordrak/tfenv.git) (pinned at v0.6.0)
+* [tfenv](https://github.com/Zordrak/tfenv.git)
 
 License
 -------

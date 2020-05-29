@@ -1,6 +1,5 @@
 # requirements pinned here
-ansible==2.2.0.0
-invoke==0.13.0
-pip-tools==4.0.0
-pyaml==17.7.2
+ansible==2.9.9
+invoke==1.4.1
+pyaml==20.4.0
 onetimepass==1.0.1

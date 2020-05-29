@@ -5,7 +5,6 @@
 	],
 	"installed_packages":
 	[
-		"Elm Language Support",
 		"Highlight Dodgy Chars",
 		"Indent XML",
 		"INI",
@@ -22,6 +21,7 @@
 		"SublimeLog",
 		"Terraform",
 		"Theme - Elementary",
-		"TrailingSpaces"
+		"TrailingSpaces",
+		"Elm Syntax Highlighting"
 	]
 }

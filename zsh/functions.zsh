@@ -13,7 +13,7 @@ add-dotfile() {
     if [[ $3 ]]; then
         post_command="-p '$3'"
     fi
-    eval "invoke add_dotfile -s $1 -r $2 $post_command"
+    eval "invoke add-dotfile -s $1 -r $2 $post_command"
     cd $curr_dir
 }
 
@@ -26,7 +26,7 @@ remove-dotfile() {
         cd $curr_dir
         return 1
     fi
-    eval "invoke remove_dotfile -p $1 -r"
+    eval "invoke remove-dotfile -p $1 -r"
     cd $curr_dir
 }
 
@@ -107,12 +107,12 @@ create-virtualenv-py368() {
     _create-virtualenv 3.6.8 $1
 }
 
-create-virtualenv-py371() {
-    _create-virtualenv 3.7.1 $1
+create-virtualenv-py373() {
+    _create-virtualenv 3.7.3 $1
 }
 
 create-virtualenv() {
-    create-virtualenv-py368 $1
+    create-virtualenv-py373 $1
 }
 
 remove-virtualenv() {
@@ -125,3 +125,9 @@ recreate-virtualenv() {
     remove-virtualenv
     create-virtualenv $1
 }
+
+recreate-virtualenv-py368() {
+    remove-virtualenv
+    create-virtualenv-py368 $1
+}
+

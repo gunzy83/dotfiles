@@ -19,8 +19,13 @@
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"default_browser": "chrome",
 	"ensure_newline_at_eof_on_save": true,
+	"folder_exclude_patterns":
+	[
+		"node_modules",
+		".tmp"
+	],
 	"font_face": "Source Code Pro",
-	"font_size": 13,
+	"font_size": 12,
 	"ignored_packages":
 	[
 		"Vintage"
@@ -32,6 +37,5 @@
 	],
 	"tab_size": 4,
 	"theme": "Elementary Dark.sublime-theme",
-	"translate_tabs_to_spaces": false,
-	"folder_exclude_patterns": ["node_modules",".tmp"]
+	"translate_tabs_to_spaces": false
 }

@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+python_version=3.7.3
+virtualenv_name=dotfiles
+virtualenv_fullname=$python_version/envs/$virtualenv_name
+
 echo "Inititalising submodules..."
 git submodule init
 git submodule update
@@ -11,15 +15,15 @@ ln -sfn $(pwd)/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
 echo "Preparing pyenv in the current shell"
 source zsh/pyenv.zsh
 
-echo "Installing python version 2.7.16 with pyenv"
-pyenv install 2.7.16 -s
+echo "Installing python version $python_version with pyenv"
+pyenv install $python_version -s
 
 echo "Creating virtualenv for dotfiles"
-pyenv virtualenv 2.7.16 dotfiles
+pyenv virtualenv $python_version $virtualenv_name
 
 echo "Activating the virtualenv and adding .python-version file"
-pyenv activate dotfiles
-echo "dotfiles" > .python-version
+pyenv activate $virtualenv_fullname
+echo $virtualenv_fullname > .python-version
 
 echo "Installing requirements for dotfiles"
 # Silence gcc warnings when compiling native extensions

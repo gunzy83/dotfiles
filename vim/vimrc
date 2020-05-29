@@ -2,7 +2,7 @@ set term=xterm-256color
 syntax on
 
 set nocompatible
-
+set mouse-=a
 set ignorecase
 set smartcase
 set number
