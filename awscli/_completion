@@ -1,0 +1,5 @@
+if [ -e "$HOME/.pyenv/versions/$DOTFILES_AWSCLI_VENV/bin/aws" ]; then
+  if [ -e "$HOME/.pyenv/versions/$DOTFILES_AWSCLI_VENV/bin/aws_zsh_completer.sh" ]; then
+    source $HOME/.pyenv/versions/$DOTFILES_AWSCLI_VENV/bin/aws_zsh_completer.sh
+  fi
+fi

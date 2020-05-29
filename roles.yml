@@ -1,3 +1,4 @@
 ---
 - src: https://github.com/gunzy83/ansible-role-dotfiles
   name: gunzy83.dotfiles
+  version: '0.1'

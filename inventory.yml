@@ -20,7 +20,7 @@
   mode: "0644"
 - src: "zgen/zgen.zsh"
   dest: "~/.zgen/zgen.zsh"
-  mode: "0644"
+  mode: "0755"
 - src: "zgen/_zgen"
   dest: "~/.zgen/_zgen"
   mode: "0644"
@@ -102,3 +102,13 @@
 - src: pyenv-extras/default-packages
   dest: ./pyenv/default-packages
   mode: "0664"
+- src: awscli/env.zsh
+  dest: ~/.zsh/env/awscli.zsh
+  mode: "0664"
+  post_command: "source ~/.zshenv && source ~/.zshrc"
+- src: awscli/alias.zsh
+  dest: ~/.zsh/alias/awscli.zsh
+  mode: "0664"
+- src: awscli/_completion
+  dest: ~/.zsh/completions/_awscli
+  mode: "0644"

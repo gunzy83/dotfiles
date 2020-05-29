@@ -23,4 +23,5 @@ echo "Updating dotfiles"
 invoke install
 
 echo "Update the shell config"
+source ~/.zshenv
 source ~/.zshrc
