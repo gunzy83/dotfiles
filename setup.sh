@@ -36,7 +36,7 @@ else
 fi
 
 echo "Ensure roles are installed"
-invoke sync_roles
+invoke sync-roles
 
 echo "Installing dotfiles"
 invoke install
