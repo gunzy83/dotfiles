@@ -16,10 +16,10 @@ echo "Preparing pyenv in the current shell"
 source zsh/pyenv.zsh
 
 echo "Installing python version $python_version with pyenv"
-pyenv install $python_version -s
+pyenv install $python_version --skip-existing
 
 echo "Creating virtualenv for dotfiles"
-pyenv virtualenv $python_version $virtualenv_name
+pyenv virtualenv -f $python_version $virtualenv_name
 
 echo "Activating the virtualenv and adding .python-version file"
 pyenv activate $virtualenv_fullname
