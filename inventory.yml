@@ -99,16 +99,19 @@
 - src: "zsh/tfenv.zsh"
   dest: "~/.zsh/env/tfenv.zsh"
   mode: "0664"
-- src: pyenv-extras/default-packages
-  dest: ./pyenv/default-packages
+- src: "pyenv-extras/default-packages"
+  dest: "./pyenv/default-packages"
   mode: "0664"
-- src: awscli/env.zsh
-  dest: ~/.zsh/env/awscli.zsh
+- src: "awscli/env.zsh"
+  dest: "~/.zsh/env/awscli.zsh"
   mode: "0664"
   post_command: "source ~/.zshenv && source ~/.zshrc"
-- src: awscli/alias.zsh
-  dest: ~/.zsh/alias/awscli.zsh
+- src: "awscli/alias.zsh"
+  dest: "~/.zsh/alias/awscli.zsh"
   mode: "0664"
-- src: awscli/_completion
-  dest: ~/.zsh/completions/_awscli
+- src: "awscli/_completion"
+  dest: "~/.zsh/completions/_awscli"
   mode: "0644"
+- src: "scripts/install_wavebox.sh"
+  dest: "~/.scripts/install_wavebox.sh"
+  mode: "0775"

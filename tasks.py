@@ -85,9 +85,9 @@ def remove_dotfile(ctx, path, restore=True):
 def get_matching_entries(src=None, dest=None):
     inventory = read_current_inventory()
     if src:
-        inventory = filter(lambda item: item['src'] == src, inventory)
+        inventory = list(filter(lambda item: item['src'] == src, inventory))
     if dest:
-        inventory = filter(lambda item: item['dest'] == dest, inventory)
+        inventory = list(filter(lambda item: item['dest'] == dest, inventory))
     return inventory
 
 

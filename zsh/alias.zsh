@@ -42,3 +42,4 @@ alias untar='tar xvf'
 
 alias json2yaml='python ~/.scripts/json2yaml.py'
 
+alias install_wavebox='~/.scripts/install_wavebox.sh'
