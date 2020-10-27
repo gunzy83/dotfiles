@@ -6,7 +6,7 @@
 #
 ansible==2.9.9            # via -r requirements.in
 cffi==1.14.0              # via cryptography
-cryptography==2.9.2       # via ansible
+cryptography==3.2         # via ansible
 invoke==1.4.1             # via -r requirements.in
 jinja2==2.11.2            # via ansible
 markupsafe==1.1.1         # via jinja2
