@@ -1,5 +1,0 @@
-# requirements pinned here
-ansible==2.9.9
-invoke==1.4.1
-pyaml==20.4.0
-onetimepass==1.0.1

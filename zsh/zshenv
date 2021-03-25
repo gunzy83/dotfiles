@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-# Source environment
-envs_chk=(~/.zsh/env/*.zsh(N))
-for file in $envs_chk; do
-	source $file
-done
