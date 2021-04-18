@@ -1,0 +1,11 @@
+[Desktop Entry]
+DefaultProfile=Shell.profile
+
+[Favorite Profiles]
+Favorites=
+
+[KonsoleWindow]
+SaveGeometryOnExit=false
+
+[MainWindow]
+ToolBarsMovable=Disabled

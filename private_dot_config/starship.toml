@@ -1,0 +1,226 @@
+add_newline = true
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$python\
+$golang\
+$nodejs\
+$terraform\
+$vagrant\
+$aws\
+$kubernetes\
+$docker_context\
+$line_break\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$cmd_duration\
+$jobs\
+$memory_usage\
+$character\
+"""
+
+[shlvl]
+disabled = false
+format = "[$symbol$shlvl]($style) "
+symbol = "↕ "
+
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+use_logical_path = false
+format = "[$path]($style)( [$read_only]($read_only_style)) "
+
+[git_branch]
+format = " [$symbol$branch]($style) "
+symbol = " "
+
+[git_commit]
+tag_disabled = false
+format = "[$hash]($style)[$tag]($style) "
+tag_symbol = " "
+
+[git_state]
+format = '[\[$state( $progress_current/$progress_total)\]]($style) '
+cherry_pick = "🍒 PICKING"
+rebase = " REBASING"
+merge = " MERGING"
+revert = " REVERTING"
+bisect = " BISECTING"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+ahead = "ﰵ${count}"
+diverged = "ﰵ${ahead_count}ﰬ${behind_count}"
+behind = "ﰬ${count}"
+conflicted = ""
+
+[hg_branch]
+format = "on [$symbol$branch]($style) "
+symbol = " "
+
+[aws]
+symbol = " "
+format = '[❯ $symbol($profile )(\($region\))]($style) '
+
+[aws.region_aliases]
+ap-south-1 = "aps1"
+ap-southeast-1 = "apse1"
+ap-southeast-2 = "apse2"
+us-east-1 = "use1"
+us-east-2 = "use2"
+
+[python]
+symbol = " "
+style = "bold blue"
+format = '[❯ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[nodejs]
+symbol = " "
+format = "[❯ $symbol($version )]($style)"
+
+[golang]
+format = "[❯ $symbol($version )]($style)"
+
+[terraform]
+format = "[❯ $symbol$workspace]($style) "
+
+[vagrant]
+format = "[❯ $symbol($version )]($style)"
+
+[jobs]
+symbol = ""
+threshold = 0
+format = "[$symbol $number]($style) "
+
+# Disable the package module, hiding it from the prompt completely
+# Enable if needed for building package for public consumption
+[package]
+disabled = true
+
+# Not used
+[cmake]
+disabled = true
+
+# Not used
+[dart]
+disabled = true
+
+# Not used
+[dotnet]
+disabled = true
+
+# Not used
+[elixir]
+disabled = true
+
+# Not used
+[erlang]
+disabled = true
+
+# Not used
+[elm]
+disabled = true
+
+# Not used, only suports single var
+[env_var]
+disabled = true
+
+# Requires helmfile or Chart.yaml in current directory
+[helm]
+disabled = true
+
+# Not used
+[java]
+disabled = true
+
+# Not used
+[julia]
+disabled = true
+
+# Not used
+[kotlin]
+disabled = true
+
+# Not used
+[nim]
+disabled = true
+
+
+# Not used
+[ocaml]
+disabled = false
+
+# Not used
+[perl]
+disabled = false
+
+# Not used
+[php]
+disabled = false
+
+# Not used
+[purescript]
+disabled = false
+
+# Not used
+[ruby]
+disabled = false
+
+# Not used
+[rust]
+disabled = false
+
+# Not used
+[swift]
+disabled = false
+
+# Not used
+[zig]
+disabled = false
+
+# Not used
+[nix_shell]
+disabled = false
+
+# Not used
+[conda]
+disabled = false
+
+# Not used
+[openstack]
+disabled = false
+
+# Not used
+[crystal]
+disabled = false
+
+# Not used
+[lua]
+disabled = false
+
+# Not used
+[battery]
+disabled = false
+
+# Not used
+[time]
+disabled = false
+
+# Not used
+[status]
+disabled = false
+
+# Not used
+[gcloud]
+disabled = false
+
+
+
+

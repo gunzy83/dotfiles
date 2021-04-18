@@ -1,0 +1,31 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"ayu",
+		"Elm Syntax Highlighting",
+		"ferm Syntax",
+		"Highlight Dodgy Chars",
+		"Indent XML",
+		"INI",
+		"Jinja2",
+		"Kotlin",
+		"Markdown Extended",
+		"nginx",
+		"Package Control",
+		"Pretty JSON",
+		"Pretty YAML",
+		"Python Checker",
+		"SerializedDataConverter",
+		"SideBarEnhancements",
+		"SublimeLog",
+		"Terraform",
+		"Theme - Elementary",
+		"TOML",
+		"TrailingSpaces"
+	]
+}

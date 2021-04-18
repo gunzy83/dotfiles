@@ -5,6 +5,13 @@ dotfiles
 
 My dotfiles collection. (Chezmoi rebuild WIP)
 
+Installation
+------------
+
+```shell
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/gunzy83/dotfiles/master/install.sh)"
+```
+
 Requirements
 ------------
 
