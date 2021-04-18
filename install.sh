@@ -37,7 +37,7 @@ finish() {
   sleep 1
 }
 
-DOTFILES="~/.local/share/chezmoi"
+DOTFILES=~/.local/share/chezmoi
 GITHUB_USER="gunzy83"
 GITHUB_REPO_SSH_REMOTE="git@github.com:$GITHUB_USER/dotfiles.git"
 GITHUB_REPO_URL_BASE="https://github.com/$GITHUB_USER/dotfiles"
@@ -88,7 +88,7 @@ install_homebrew_deps() {
     sudo eopkg -y it -c system.devel && sudo eopkg -y it curl file git
   elif [ "$OS" == 'Manjaro Linux' ]; then
     info "Manjaro Linux detected, installing with pacman..."
-    sudo pacman -S base-devel curl git
+    sudo pacman -S --noconfirm base-devel curl git
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, installing with apt..."
     sudo apt-get install -y build-essential curl file git
@@ -132,16 +132,19 @@ install_chezmoi() {
 chezmoi_apply() {
   info "Trying to detect installed dotfiles in $DOTFILES..."
 
-  if [ ! -d $DOTFILES ]; then
+  if [ ! -d $DOTFILES ]
+  then
     echo "Seems like you don't have dotfiles installed!"
     info "Installing dotfiles and applying..."
     chezmoi init --apply --verbose $GITHUB_USER
-    # assume machine is going to be used for development of dotfiles
-    # TODO: Add question to installer to toggle this off.
-    chezmoi git remote set-url origin "$GITHUB_REPO_SSH_REMOTE"
   else
-    success "You already have dotfiles installed. Skipping..."
+    success "You already have dotfiles installed. Updating and applying..."
+    chezmoi update --verbose
   fi
+  # assume machine is going to be used for development of dotfiles
+  # TODO: Add question to installer to toggle this off.
+  info "Updating dotfiles origin to allow development..."
+  chezmoi git remote set-url origin $GITHUB_REPO_SSH_REMOTE
 
   finish
 }

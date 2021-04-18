@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.osRelease.id "manjaro") -}}
 #!/bin/sh
 sudo pacman -S --noconfirm docker docker-compose
-sudo pacman -S --noconfirm --as-deps pigz
+sudo pacman -S --noconfirm --asdeps pigz
 {{ else if (eq .chezmoi.osRelease.id "solus") -}}
 #!/bin/sh
 sudo eopkg -y it docker docker-compose
