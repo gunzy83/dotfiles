@@ -1,12 +1,12 @@
 {{- if (eq .chezmoi.osRelease.id "manjaro") -}}
 #!/bin/sh
-sudo pacman -S base-devel curl git zsh vim yakuake konsole fontconfig barrier tig
+sudo pacman -S --noconfirm base-devel curl git zsh vim yakuake konsole fontconfig barrier tig
 {{ else if (eq .chezmoi.osRelease.id "solus") -}}
 #!/bin/sh
-sudo eopkg it -c system.devel
-sudo eopkg it curl file git zsh vim yakuake konsole fontconfig barrier snapd tig
+sudo eopkg -y it -c system.devel
+sudo eopkg -y it curl file git zsh vim yakuake konsole fontconfig barrier snapd tig
 {{ else if (eq .chezmoi.osRelease.id "ubuntu") -}}
 #!/bin/sh
 sudo apt-get update
-sudo apt-get install build-essential curl file git zsh vim yakuake konsole font-config barrier tig
+sudo apt-get install -y build-essential curl file git zsh vim yakuake konsole font-config barrier tig
 {{ end -}}

@@ -5,7 +5,7 @@ cd ~/.tmp
 git clone https://aur.archlinux.org/aura-bin.git
 cd aura-bin
 makepkg
-sudo pacman -U aura-bin-*
+sudo pacman -U --noconfirm aura-bin-*
 cd ..
 rm -rf aura-bin
 {{ end -}}

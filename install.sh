@@ -85,13 +85,13 @@ install_homebrew_deps() {
 
   if [ "$OS" == 'Solus' ]; then
     info "Solus Linux detected, installing with eopkg..."
-    sudo eopkg it -c system.devel && sudo eopkg it curl file git
+    sudo eopkg -y it -c system.devel && sudo eopkg -y it curl file git
   elif [ "$OS" == 'Manjaro Linux' ]; then
     info "Manjaro Linux detected, installing with pacman..."
     sudo pacman -S base-devel curl git
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, installing with apt..."
-    sudo apt-get install build-essential curl file git
+    sudo apt-get install -y build-essential curl file git
   else
     error "Linux distribution not supported!"
     exit 2

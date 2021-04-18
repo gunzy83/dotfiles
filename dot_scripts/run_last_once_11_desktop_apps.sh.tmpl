@@ -2,27 +2,27 @@
 #!/bin/sh
 curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
 echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
-sudo pacman -S sublime-text vivaldi
-sudo pacman -S --as-deps libappindicator-gtk3 vivaldi-ffmpeg-codecs
-sudo aura -A google-chrome spotify bitwarden-bin simplenote-electron-bin authy wavebox slack-desktop plex-media-player exodus trezor-bridge-bin
+sudo pacman -S --noconfirm sublime-text vivaldi
+sudo pacman -S --noconfirm --as-deps libappindicator-gtk3 vivaldi-ffmpeg-codecs
+sudo aura -A --noconfirm google-chrome spotify bitwarden-bin simplenote-electron-bin authy wavebox slack-desktop plex-media-player exodus trezor-bridge-bin
 {{ else if (eq .chezmoi.osRelease.id "solus") -}}
 #!/bin/sh
 sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/getsolus/3rd-party/master/network/web/browser/google-chrome-stable/pspec.xml
-sudo eopkg it google-chrome-*.eopkg;sudo rm google-chrome-*.eopkg
+sudo eopkg -y it google-chrome-*.eopkg;sudo rm google-chrome-*.eopkg
 sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/getsolus/3rd-party/master/multimedia/music/spotify/pspec.xml
-sudo eopkg it spotify*.eopkg;sudo rm spotify*.eopkg
+sudo eopkg -y it spotify*.eopkg;sudo rm spotify*.eopkg
 sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/getsolus/3rd-party/master/programming/sublime-text-3/pspec.xml
-sudo eopkg it sublime*.eopkg;sudo rm sublime*.eopkg
-sudo eopkg it simplenote
+sudo eopkg -y it sublime*.eopkg;sudo rm sublime*.eopkg
+sudo eopkg -y it simplenote
 sudo snap install bitwarden
 sudo snap install authy --beta
 {{ else if (eq .chezmoi.osRelease.id "ubuntu") -}}
 #!/bin/sh
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-sudo apt-get install apt-transport-https
+sudo apt-get install -y apt-transport-https
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
-sudo apt-get install sublime-text
+sudo apt-get install -y sublime-text
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 # todo: add missing packages or deprecate ubuntu as install target
