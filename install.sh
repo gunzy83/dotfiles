@@ -38,22 +38,23 @@ finish() {
 }
 
 DOTFILES="~/.local/share/chezmoi"
-GITHUB_REPO_URL_BASE="https://github.com/gunzy83/dotfiles"
-GITHUB_REPO_SSH_REMOTE="git@github.com:gunzy83/dotfiles.git"
+GITHUB_USER="gunzy83"
+GITHUB_REPO_SSH_REMOTE="git@github.com:$GITHUB_USER/dotfiles.git"
+GITHUB_REPO_URL_BASE="https://github.com/$GITHUB_USER/dotfiles"
 HOMEBREW_INSTALLER_URL="https://raw.githubusercontent.com/Homebrew/install/master/install"
 
 on_start() {
-  info "           __        __   ____ _  __           "
-  info "      ____/ /____   / /_ / __/(_)/ /___   _____"
-  info "     / __  // __ \ / __// /_ / // // _ \ / ___/"
-  info "  _ / /_/ // /_/ // /_ / __// // //  __/(__  ) "
-  info " (_)\__,_/ \____/ \__//_/  /_//_/ \___//____/  "
-  info "                                               "
-  info "              by @gunzy83                      "
-  info "                                               "
-  info "This script will install dotfiles for @gunzy83."
-  info "                                               "
-  info "If you are not @gunzy83, ensure you fork all files containing secrets before running."
+  info "           __        __   ____ _  __                "
+  info "      ____/ /____   / /_ / __/(_)/ /___   _____     "
+  info "     / __  // __ \ / __// /_ / // // _ \ / ___/     "
+  info "  _ / /_/ // /_/ // /_ / __// // //  __/(__  )      "
+  info " (_)\__,_/ \____/ \__//_/  /_//_/ \___//____/       "
+  info "                                                    "
+  info "              by @$GITHUB_USER                      "
+  info "                                                    "
+  info "This script will install dotfiles for @$GITHUB_USER."
+  info "                                                    "
+  info "If you are not @$GITHUB_USER, ensure you fork all files containing secrets before running."
   echo
   read -p "Do you want to proceed with installation? [y/N] " -n 1 answer
   echo
@@ -134,8 +135,9 @@ chezmoi_apply() {
   if [ ! -d $DOTFILES ]; then
     echo "Seems like you don't have dotfiles installed!"
     info "Installing dotfiles and applying..."
-    chezmoi init --apply --verbose "$GITHUB_REPO_URL_BASE.git"
+    chezmoi init --apply --verbose $GITHUB_USER
     # assume machine is going to be used for development of dotfiles
+    # TODO: Add question to installer to toggle this off.
     chezmoi git remote set-url origin "$GITHUB_REPO_SSH_REMOTE"
   else
     success "You already have dotfiles installed. Skipping..."

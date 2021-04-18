@@ -1,0 +1,11 @@
+{{ if (or (eq .chezmoi.osRelease.id "manjaro") (eq .chezmoi.osRelease.id "arch")) -}}
+#!/bin/sh
+mkdir ~/.tmp
+cd ~/.tmp
+git clone https://aur.archlinux.org/aura-bin.git
+cd aura-bin
+makepkg
+sudo pacman -U aura-bin-*
+cd ..
+rm -rf aura-bin
+{{ end -}}
