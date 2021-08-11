@@ -1,0 +1,34 @@
+[user]
+    name = Ross Williams
+    email = gunzy83au@gmail.com
+[core]
+    editor = vim
+    filemode = false
+
+[color]
+    ui = auto
+
+[push]
+    default = matching
+
+[status]
+    submoduleSummary = true
+
+[diff]
+    submodule = log
+
+[init]
+    templatedir = ~/.git/templates
+    defaultBranch = master
+
+[alias]
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+
+[alias]
+    sync = "!f(){ git fetch ${1:-origin} && git rebase ${1:-origin}/master; };f"
+
+[alias]
+    newbranch = "!f(){ if [ -z $@ ]; then echo 'Usage: git newbranch <branch_name>'; else git checkout master && git sync && git checkout -b $@; fi; };f"
+
+[includeIf "gitdir:~/projects/work/"]
+    path = ~/.gitconfigwork

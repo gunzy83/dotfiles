@@ -1,6 +1,7 @@
 {{- if (eq .chezmoi.osRelease.id "manjaro") -}}
 #!/bin/sh
-sudo pacman -S base-devel curl git zsh vim yakuake konsole fontconfig barrier tig
+sudo pacman -Syu --noconfirm
+sudo pacman -S --asdeps --noconfirm gunzy-init
 {{ else if (eq .chezmoi.osRelease.id "solus") -}}
 #!/bin/sh
 sudo eopkg it -c system.devel

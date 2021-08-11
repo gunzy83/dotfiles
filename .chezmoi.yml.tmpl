@@ -1,0 +1,5 @@
+{{- $desktop := promptBool "Is this machine a desktop" -}}
+data:
+  local:
+    is_desktop: {{ $desktop }}
+

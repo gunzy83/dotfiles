@@ -87,8 +87,8 @@ install_homebrew_deps() {
     info "Solus Linux detected, installing with eopkg..."
     sudo eopkg -y it -c system.devel && sudo eopkg -y it curl file git
   elif [ "$OS" == 'Manjaro Linux' ]; then
-    info "Manjaro Linux detected, installing with pacman..."
-    sudo pacman -S --noconfirm base-devel curl git
+    info "Manjaro Linux detected, installing gunzy-init with pacman..."
+    sudo pacman -U --noconfirm http://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.1-1-any.pkg.tar.zst
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, installing with apt..."
     sudo apt-get install -y build-essential curl file git

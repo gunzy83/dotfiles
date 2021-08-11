@@ -21,7 +21,7 @@ This dotfiles collection is designed to be self contained within an installed di
 * [Solus](https://getsol.us/home/)
 * [Ubuntu](https://ubuntu.com/) (partially complete)
 
-Before starting deployment of the dotfiles, check the hard and soft limit for open files:
+Before starting deployment of the dotfiles, check the hard and soft limit for open files (mainly needed for brew):
 
 ```shell
 ulimit -Hn
