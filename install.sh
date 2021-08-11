@@ -88,6 +88,7 @@ install_homebrew_deps() {
     sudo eopkg -y it -c system.devel && sudo eopkg -y it curl file git
   elif [ "$OS" == 'Manjaro Linux' ]; then
     info "Manjaro Linux detected, installing gunzy-init with pacman..."
+    sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Optional/g' /etc/pacman.conf
     sudo pacman -U --noconfirm http://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.1-1-any.pkg.tar.zst
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, installing with apt..."
@@ -139,6 +140,7 @@ chezmoi_apply() {
     chezmoi init --apply --verbose $GITHUB_USER
   else
     success "You already have dotfiles installed. Updating and applying..."
+    chezmoi init
     chezmoi update --verbose
   fi
   # assume machine is going to be used for development of dotfiles

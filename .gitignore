@@ -3,3 +3,4 @@
 .history.yml
 *.merged-ca-bundle
 .uuid
+chezmoi.yml

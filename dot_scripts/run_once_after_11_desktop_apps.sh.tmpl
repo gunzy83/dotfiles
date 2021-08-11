@@ -1,6 +1,6 @@
 {{- if (eq .chezmoi.osRelease.id "manjaro") -}}
 #!/bin/sh
-{{- if .local.is_desktop }}
+{{ if .local.is_desktop }}
 sudo pacman -S --noconfirm gunzy-desktop
 {{ else -}}
 sudo pacman -S --noconfirm gunzy-laptop
