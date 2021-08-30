@@ -24,7 +24,7 @@ ulimit -Hn
 ulimit -Sn
 ```
 
-If either are below `8192` some programs may not work correctly (including some games and installing some `brew` [formulae with many dependencies](https://github.com/Homebrew/brew/issues/9120)). To correct this, add the required settings to `/etc/security/limits.conf` or `/etc/security/limits.d/20-custom.conf`:
+If either are below `8192` some programs may not work correctly (including some games and installing some `brew` [formulae with many dependencies](https://github.com/Homebrew/brew/issues/9120). To correct this, add the required settings to `/etc/security/limits.conf` or `/etc/security/limits.d/20-custom.conf`:
 
 ```shell
 * hard nofile 524288

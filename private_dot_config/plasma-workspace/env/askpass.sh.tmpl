@@ -1,0 +1,5 @@
+{{- if (eq .chezmoi.osRelease.id "manjaro") -}}
+#!/bin/sh
+
+export SSH_ASKPASS='/usr/bin/ksshaskpass'
+{{ end -}}

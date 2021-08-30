@@ -1,0 +1,6 @@
+{{- if (eq .chezmoi.osRelease.id "manjaro") -}}
+[Desktop Entry]
+Exec=ssh-add -q ~/.ssh/internal ~/.ssh/github ~/.ssh/bitbucket ~/.ssh/ansible ~/.ssh/terraform
+Name=ssh-add
+Type=Application
+{{ end -}}

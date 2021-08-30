@@ -1,0 +1,4 @@
+{{- if (eq .chezmoi.osRelease.id "manjaro") -}}
+#!/bin/sh
+systemctl enable --now --user ssh-agent.service
+{{ end -}}
