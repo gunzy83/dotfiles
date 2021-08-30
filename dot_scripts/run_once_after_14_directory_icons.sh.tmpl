@@ -1,0 +1,6 @@
+{{- if (eq .chezmoi.osRelease.id "manjaro") -}}
+#!/bin/sh
+cd /usr/share/icons
+sudo numix-folders
+echo "Ensure icon theme is changed to non-Numix and back again to enable icon change"
+{{ end -}}

@@ -1,0 +1,4 @@
+{{- if (eq .chezmoi.osRelease.id "manjaro") -}}
+#!/bin/sh
+sudo systemctl enable --now pcscd.service
+{{ end -}}
