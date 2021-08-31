@@ -88,8 +88,8 @@ install_homebrew_deps() {
     sudo eopkg -y it -c system.devel && sudo eopkg -y it curl file git
   elif [ "$OS" == 'Manjaro Linux' ]; then
     info "Manjaro Linux detected, installing gunzy-init with pacman..."
-    sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Optional/g' /etc/pacman.conf
-    sudo pacman -U --noconfirm http://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.3-1-any.pkg.tar.zst
+    sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Never/g' /etc/pacman.conf
+    sudo pacman -U --noconfirm https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.4-1-any.pkg.tar.zst
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, installing with apt..."
     sudo apt-get install -y build-essential curl file git
