@@ -35,5 +35,6 @@ view-full-screen=Ctrl+Shift+F11
 
 [Window]
 Height=80
+KeepOpen=true
 Screen=1
 Width=80

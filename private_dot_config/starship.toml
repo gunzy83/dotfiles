@@ -96,7 +96,8 @@ format = "[❯ $symbol($version )]($style)"
 
 [jobs]
 symbol = ""
-threshold = 0
+symbol_threshold = 1
+number_threshold = 1
 format = "[$symbol $number]($style) "
 
 # Disable the package module, hiding it from the prompt completely
