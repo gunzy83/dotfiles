@@ -63,6 +63,26 @@ on_start() {
   fi
 }
 
+check_pre_steps() {
+  logout_required = 0
+  if [ "$@" == 'Manjaro Linux' ]; then
+    if [ ! -f /etc/security/limits.d/20-custom.conf ]; then
+      info "Manjaro requires an increase in open file limits, applying update to /etc/security/limits.d/20-custom.conf..."
+      sudo echo "* hard nofile 524288\n* soft nofile 16384\n" | sudo tee /etc/security/limits.d/20-custom.conf
+      logout_required = 1
+    fi
+  fi
+  if [ $(getent passwd $USER | awk -F: '{print $NF}') != "/bin/zsh" ]; then
+    info "Setting shell for user $USER to zsh..."
+    sudo usermod --shell /bin/zsh ${USER}
+    logout_required = 1
+  fi
+  if [ $logout_required -eq 1 ]; then
+    info "Warning: Please re-login to apply system settings to proceed with the install."
+    exit 1
+  fi
+}
+
 install_homebrew_deps() {
   if [ -f /etc/os-release ]; then
     # freedesktop.org and systemd
@@ -81,14 +101,17 @@ install_homebrew_deps() {
     exit 1
   fi
 
+  check_pre_steps OS
+
   info "Installing homebrew dependencies..."
 
   if [ "$OS" == 'Solus' ]; then
     info "Solus Linux detected, installing with eopkg..."
     sudo eopkg -y it -c system.devel && sudo eopkg -y it curl file git
   elif [ "$OS" == 'Manjaro Linux' ]; then
-    info "Manjaro Linux detected, installing gunzy-init with pacman..."
+    info "Manjaro Linux detected, preparing pacman and installing gunzy-init..."
     sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Never/g' /etc/pacman.conf
+    sudo pacman-mirrors --geoip --method rank && sudo pacman -Syyu
     sudo pacman -U --noconfirm https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.4-1-any.pkg.tar.zst
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, installing with apt..."
@@ -182,6 +205,7 @@ on_error() {
 
 main() {
   on_start "$*"
+  check_pre_steps "$*"
   install_homebrew_deps "$*"
   install_homebrew "$*"
   install_chezmoi "$*"

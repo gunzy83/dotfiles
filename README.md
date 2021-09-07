@@ -17,22 +17,6 @@ The following distributions have working config but may be incomplete:
 * [Ubuntu](https://ubuntu.com/)
 * [Solus](https://getsol.us/home/)
 
-Before starting deployment of the dotfiles, check the hard and soft limit for open files (mainly needed for brew):
-
-```shell
-ulimit -Hn
-ulimit -Sn
-```
-
-If either are below `8192` some programs may not work correctly (including some games and installing some `brew` [formulae with many dependencies](https://github.com/Homebrew/brew/issues/9120). To correct this, add the required settings to `/etc/security/limits.conf` or `/etc/security/limits.d/20-custom.conf`:
-
-```shell
-* hard nofile 524288
-* soft nofile 16384
-```
-
-Log back in to apply the changes.
-
 Installation
 ------------
 

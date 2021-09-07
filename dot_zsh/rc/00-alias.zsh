@@ -27,7 +27,7 @@ alias la="ls -laF"
 alias lsd="ls -lF | grep --color=never '^d'"
 
 # IP addresses
-alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias pubip="dog myip.opendns.com @resolver1.opendns.com --short"
 alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias ips="sudo ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
