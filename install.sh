@@ -96,7 +96,7 @@ install_homebrew_deps() {
     OS=$(uname -s)
   fi
 
-  if [ `uname` != 'Linux' ]; then
+  if [ `uname` != 'Linux' ] || [ `uname` != 'Darwin' ]; then
     error "Operating system not supported!"
     exit 1
   fi
@@ -116,6 +116,9 @@ install_homebrew_deps() {
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, installing with apt..."
     sudo apt-get install -y build-essential curl file git
+  elif [ "$OS" == 'Darwin' ]; then
+    info "Darwin detected, installing Xcode CLI Tools..."
+    xcode-select --install
   else
     error "Linux distribution not supported!"
     exit 2
