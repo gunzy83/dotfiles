@@ -1,1 +1,1 @@
-complete -o nospace -C /home/linuxbrew/.linuxbrew/bin/terraform terraform
+complete -o nospace -C $(brew --prefix)/bin/terraform terraform

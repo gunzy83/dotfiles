@@ -4,3 +4,4 @@
 *.merged-ca-bundle
 .uuid
 chezmoi.yml
+.DS_Store

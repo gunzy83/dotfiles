@@ -5,7 +5,7 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 tap "little-angry-clouds/homebrew-my-brews"
 {{ if .local.is_work }}
-brew tap "canva/packages", "org-2562356@github.com:Canva/homebrew-packages.git"
+tap "canva/packages", "org-2562356@github.com:Canva/homebrew-packages.git"
 {{ end -}}
 brew "aws-iam-authenticator"
 brew "awscli"

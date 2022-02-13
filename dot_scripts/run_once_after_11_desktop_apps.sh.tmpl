@@ -1,3 +1,4 @@
+{{- if (eq .chezmoi.os "linux") -}}
 {{- if (eq .chezmoi.osRelease.id "manjaro") -}}
 #!/bin/sh
 {{ if .local.is_desktop }}
@@ -26,4 +27,5 @@ sudo apt-get install sublime-text
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 # todo: add missing packages or deprecate ubuntu as install target
+{{ end -}}
 {{ end -}}
