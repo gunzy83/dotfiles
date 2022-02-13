@@ -1,2 +1,4 @@
+{{ if ne .chezmoi.os "darwin" }}
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+{{ end -}}
 FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH

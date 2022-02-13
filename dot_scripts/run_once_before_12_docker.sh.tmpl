@@ -1,3 +1,4 @@
+{{ if ne .chezmoi.os "darwin" -}}
 #!/bin/sh
 {{ if (eq .chezmoi.osRelease.id "solus") -}}
 sudo eopkg it docker docker-compose
@@ -8,6 +9,7 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] 
 sudo add-apt-repository universe
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
-{{ end -}}
+{{ end }}
 sudo groupadd docker || true
 sudo usermod -aG docker $USER
+{{ end }}

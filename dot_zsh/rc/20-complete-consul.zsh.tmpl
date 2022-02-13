@@ -1,1 +1,3 @@
+{{ if not .local.is_work }}
 complete -o nospace -C /home/linuxbrew/.linuxbrew/bin/consul consul
+{{ end -}}

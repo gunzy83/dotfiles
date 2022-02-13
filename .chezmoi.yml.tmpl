@@ -1,5 +1,7 @@
 {{- $desktop := promptBool "Is this machine a desktop" -}}
+{{- $work := promptBool "Is this machine a work machine" -}}
 data:
   local:
     is_desktop: {{ $desktop }}
+    is_work: {{ $work }}
 

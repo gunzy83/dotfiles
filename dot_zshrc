@@ -9,7 +9,7 @@ export LANGUAGE=en_AU.UTF-8
 # Ensure editor is set
 export EDITOR=vim
 
-export ZPLUG_HOME=/home/linuxbrew/.linuxbrew/opt/zplug
+export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 # Oh-My-Zsh core

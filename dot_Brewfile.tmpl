@@ -4,24 +4,44 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "little-angry-clouds/homebrew-my-brews"
+{{ if .local.is_work }}
+brew tap "canva/packages", "org-2562356@github.com:Canva/homebrew-packages.git"
+{{ end -}}
 brew "aws-iam-authenticator"
 brew "awscli"
+{{ if eq .chezmoi.os "darwin" }}
+brew "bash"
+{{ end -}}
 brew "certstrap"
 brew "chezmoi"
 brew "dog"
 brew "eksctl"
 brew "hugo"
+{{ if .local.is_work }}
+brew "infra-tools"
+{{ end -}}
+brew "jq"
 brew "krew"
 brew "kubectx"
 brew "octant"
 brew "pyenv"
 brew "pyenv-virtualenv"
 brew "starship"
+{{ if eq .chezmoi.os "darwin" }}
+brew "terminal-notifier"
+{{ end -}}
 brew "tfenv"
+{{ if eq .chezmoi.os "darwin" }}
+brew "vim"
+{{ end -}}
 brew "zplug"
 brew "aquasecurity/trivy/trivy"
 brew "gunzy83/custom/pyenv-default-packages"
+{{ if not .local.is_work }}
 brew "hashicorp/tap/consul"
 brew "hashicorp/tap/nomad"
+{{ end -}}
 brew "hashicorp/tap/vault"
 brew "little-angry-clouds/homebrew-my-brews/helmenv"
+
+

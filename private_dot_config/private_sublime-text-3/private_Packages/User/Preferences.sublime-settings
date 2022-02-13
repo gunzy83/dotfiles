@@ -38,7 +38,7 @@
 	],
 	"tab_size": 4,
 	"theme": "ayu-mirage.sublime-theme",
-	"translate_tabs_to_spaces": false,
+	"translate_tabs_to_spaces": true,
 	"ui_native_titlebar": false,
 	"ui_separator": true,
 	"ui_wide_scrollbars": true,

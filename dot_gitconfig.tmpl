@@ -30,5 +30,7 @@
 [alias]
     newbranch = "!f(){ if [ -z $@ ]; then echo 'Usage: git newbranch <branch_name>'; else git checkout master && git sync && git checkout -b $@; fi; };f"
 
-[includeIf "gitdir:~/projects/work/"]
+{{ if .local.is_work }}
+[includeIf "gitdir:~/work/"]
     path = ~/.gitconfigwork
+{{ end -}}
