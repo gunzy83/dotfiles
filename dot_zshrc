@@ -42,11 +42,9 @@ zplug load
 autoload -U +X bashcompinit && bashcompinit
 
 # Source bash completions
-# funcs_chk=(~/.zsh/bash-completions/*.zsh(N))
-# for file in $funcs_chk; do
-#     source $file
-# done
+funcs_chk=(~/.zsh/bash-completions/*.zsh(N))
+for file in $funcs_chk; do
+    source $file
+done
 
 eval "$(starship init zsh)"
-
-
