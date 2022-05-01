@@ -12,8 +12,9 @@ brew "awscli"
 {{ if eq .chezmoi.os "darwin" }}
 brew "bash"
 {{ end -}}
-brew "certstrap"
+brew "cfssl"
 brew "chezmoi"
+brew "direnv"
 brew "dog"
 brew "eksctl"
 brew "hugo"
@@ -26,6 +27,7 @@ brew "kubectx"
 brew "octant"
 brew "pyenv"
 brew "pyenv-virtualenv"
+brew "rbw"
 brew "starship"
 {{ if eq .chezmoi.os "darwin" }}
 brew "terminal-notifier"
