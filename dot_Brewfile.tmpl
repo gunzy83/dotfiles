@@ -17,6 +17,9 @@ brew "chezmoi"
 brew "direnv"
 brew "dog"
 brew "eksctl"
+{{ if eq .chezmoi.os "darwin" }}
+brew "git"
+{{ end -}}
 brew "hugo"
 {{ if .local.is_work }}
 brew "infra-tools"
@@ -34,6 +37,7 @@ brew "terminal-notifier"
 {{ end -}}
 brew "tfenv"
 {{ if eq .chezmoi.os "darwin" }}
+brew "tig"
 brew "vim"
 {{ end -}}
 brew "zplug"
