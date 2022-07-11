@@ -64,18 +64,18 @@ on_start() {
 }
 
 check_pre_steps() {
-  logout_required = 0
+  logout_required=0
   if [ "$@" == 'Manjaro Linux' ]; then
     if [ ! -f /etc/security/limits.d/20-custom.conf ]; then
       info "Manjaro requires an increase in open file limits, applying update to /etc/security/limits.d/20-custom.conf..."
       sudo echo "* hard nofile 524288\n* soft nofile 16384\n" | sudo tee /etc/security/limits.d/20-custom.conf
-      logout_required = 1
+      logout_required=1
     fi
   fi
   if [ $(getent passwd $USER | awk -F: '{print $NF}') != "/bin/zsh" ]; then
     info "Setting shell for user $USER to zsh..."
     sudo usermod --shell /bin/zsh ${USER}
-    logout_required = 1
+    logout_required=1
   fi
   if [ $logout_required -eq 1 ]; then
     info "Warning: Please re-login to apply system settings to proceed with the install."
@@ -96,7 +96,7 @@ install_homebrew_deps() {
     OS=$(uname -s)
   fi
 
-  if [ `uname` != 'Linux' ] || [ `uname` != 'Darwin' ]; then
+  if [ `uname` != 'Linux' ] && [ `uname` != 'Darwin' ]; then
     error "Operating system not supported!"
     exit 1
   fi
