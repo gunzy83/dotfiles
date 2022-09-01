@@ -1,5 +1,5 @@
 {{- if (eq .chezmoi.os "linux") -}}
-#!/bin/sh
+#!/bin/bash -e
 mkdir -p ~/.config/Yubico
 echo "Prepare to press button on Yubikey..."
 pamu2fcfg -o pam://hostname -i pam://hostname > ~/.config/Yubico/u2f_keys

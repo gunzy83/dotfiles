@@ -1,6 +1,6 @@
 {{- if (eq .chezmoi.os "linux") -}}
 {{- if (eq .chezmoi.osRelease.id "manjaro") -}}
-#!/bin/sh
+#!/bin/bash -e
 sudo mkdir -p /etc/1password
 echo "wavebox" | sudo tee -a /etc/1password/custom_allowed_browsers > /dev/null
 sudo chown root:root /etc/1password/custom_allowed_browsers
@@ -14,7 +14,7 @@ if grep -Fxq "auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=p
 then
     echo "U2F already configured in PAM, skipping..."
 else
-    sed '/^auth       include      system-auth/i auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname' /etc/pam.d/polkit-1
+    sed '/^auth       include      system-auth/i auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname' /etc/pam.d/polkit-1 | sudo tee /etc/pam.d/polkit-1
 fi
 {{ end -}}
 {{ end -}}
