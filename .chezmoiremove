@@ -1,0 +1,4 @@
+.zsh/env/00_brew.zsh
+.zsh/env/01_pyenv.zsh
+.zsh/env/02_ssh-agent.zsh
+.zsh/env/20_snap.zsh

@@ -1,15 +1,5 @@
 #!/bin/zsh
-# Extend $PATH without duplicates
-_extend_path() {
-  if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$1" ) ; then
-    export PATH="$1:$PATH"
-  fi
-}
-
-# Add custom bin to $PATH
-[[ -d "$HOME/.bin" ]] && _extend_path "$HOME/.bin"
-
-# Source environment files
+# Source environment files (only environment variables for both user sessions and scripts)
 envs_chk=(~/.zsh/env/*.zsh(N))
 for file in $envs_chk; do
 	source $file

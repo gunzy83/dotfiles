@@ -9,6 +9,12 @@ export LANGUAGE=en_AU.UTF-8
 # Ensure editor is set
 export EDITOR=vim
 
+# Source init files before calling ZPLUG
+init_chk=(~/.zsh/init/*.zsh(N))
+for file in $init_chk; do
+    source $file
+done
+
 export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
