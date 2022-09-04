@@ -16,6 +16,7 @@
 		"*.jar",
 		"*.zip"
 	],
+	"caret_style": "smooth",
 	"color_scheme": "Packages/ayu/ayu-mirage.sublime-color-scheme",
 	"default_browser": "chrome",
 	"ensure_newline_at_eof_on_save": true,
@@ -29,7 +30,7 @@
 	"font_face": "FiraCode Nerd Font Mono",
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
 	],
 	"indent_guide_options":
 	[
@@ -42,5 +43,5 @@
 	"ui_native_titlebar": false,
 	"ui_separator": true,
 	"ui_wide_scrollbars": true,
-	"update_check": false
+	"update_check": false,
 }

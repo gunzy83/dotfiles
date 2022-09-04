@@ -1,3 +1,7 @@
+[Appearance]
+Skin=breeze_dark
+SkinInstalledWithKns=true
+
 [Desktop Entry]
 DefaultProfile=Shell.profile
 
@@ -34,7 +38,10 @@ toggle-session-monitor-silence=Ctrl+Shift+I
 view-full-screen=Ctrl+Shift+F11
 
 [Window]
-Height=80
+Height=90
+{{ if (eq .chezmoi.osRelease.id "manjaro") -}}
+KeepAbove=false
+{{ end -}}
 KeepOpen=true
 Screen=1
-Width=80
+Width=90

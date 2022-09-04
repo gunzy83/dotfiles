@@ -76,6 +76,10 @@ ap-southeast-2 = "apse2"
 us-east-1 = "use1"
 us-east-2 = "use2"
 
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style) '
+
 [python]
 symbol = " "
 style = "bold blue"

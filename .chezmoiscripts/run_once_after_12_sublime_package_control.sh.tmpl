@@ -1,0 +1,8 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+SUBLIME_PACKAGE_DIR=~/.config/sublime-text/Installed\ Packages/
+PACKAGE_CONTROL_FILENAME=Package%20Control.sublime-package
+if [ ! -f $SUBLIME_PACKAGE_DIR$PACKAGE_CONTROL_FILENAME ]; then
+    wget https://packagecontrol.io/$PACKAGE_CONTROL_FILENAME -P $SUBLIME_PACKAGE_DIR
+fi
+{{ end -}}

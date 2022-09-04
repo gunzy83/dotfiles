@@ -1,0 +1,8 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/sh
+# Add a list of font files to the script to force a change when the list of fonts changes. Does not detect a file replacement for a new font version.
+{{ range $file := glob (print $.chezmoi.sourceDir "/dot_fonts/*") }}
+# {{ $file }}
+{{ end }}
+fc-cache -vf ~/.fonts
+{{ end -}}
