@@ -1,3 +1,10 @@
+{{ if (eq .chezmoi.osRelease.id "manjaro") -}}
+#!/bin/bash
+tmpfile=$(mktemp)
+trap "rm -f ${tmpfile}" EXIT
+cat > "${tmpfile}"
+
+cat <<EOF | crudini --merge "${tmpfile}"
 [Appearance]
 Skin=breeze_dark
 SkinInstalledWithKns=true
@@ -39,9 +46,14 @@ view-full-screen=Ctrl+Shift+F11
 
 [Window]
 Height=90
-{{ if (eq .chezmoi.osRelease.id "manjaro") -}}
 KeepAbove=false
-{{ end -}}
 KeepOpen=true
+{{ if not .local.is_work }}
 Screen=1
-Width=90
+{{ end -}}
+ToggleToFocus=true
+
+EOF
+cat "${tmpfile}"
+
+{{ end -}}
