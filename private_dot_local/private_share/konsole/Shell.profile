@@ -1,7 +1,7 @@
 [Appearance]
 AntiAliasFonts=true
 BoldIntense=true
-ColorScheme=base16-monokai
+ColorScheme=Monokai-Flat
 Font=FiraCode Nerd Font Mono,11,-1,5,50,0,0,0,0,0
 LineSpacing=0
 UseFontLineChararacters=false
