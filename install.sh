@@ -15,6 +15,10 @@ _exists() {
   command -v $1 > /dev/null 2>&1
 }
 
+_pause() {
+  read -p "Press [Enter] key to continue..."
+}
+
 # Success reporter
 info() {
   echo -e "${CYAN}${*}${RESET}"
@@ -42,6 +46,7 @@ GITHUB_USER="gunzy83"
 GITHUB_REPO_SSH_REMOTE="git@github.com:$GITHUB_USER/dotfiles.git"
 GITHUB_REPO_URL_BASE="https://github.com/$GITHUB_USER/dotfiles"
 HOMEBREW_INSTALLER_URL="https://raw.githubusercontent.com/Homebrew/install/master/install"
+OS=None
 
 on_start() {
   info "           __        __   ____ _  __                "
@@ -63,27 +68,7 @@ on_start() {
   fi
 }
 
-check_pre_steps() {
-  logout_required=0
-  if [ "$@" == 'Manjaro Linux' ]; then
-    if [ ! -f /etc/security/limits.d/20-custom.conf ]; then
-      info "Manjaro requires an increase in open file limits, applying update to /etc/security/limits.d/20-custom.conf..."
-      sudo echo "* hard nofile 524288\n* soft nofile 16384\n" | sudo tee /etc/security/limits.d/20-custom.conf
-      logout_required=1
-    fi
-  fi
-  if [ $(getent passwd $USER | awk -F: '{print $NF}') != "/bin/zsh" ]; then
-    info "Setting shell for user $USER to zsh..."
-    sudo usermod --shell /bin/zsh ${USER}
-    logout_required=1
-  fi
-  if [ $logout_required -eq 1 ]; then
-    info "Warning: Please re-login to apply system settings to proceed with the install."
-    exit 1
-  fi
-}
-
-install_homebrew_deps() {
+get_os_name() {
   if [ -f /etc/os-release ]; then
     # freedesktop.org and systemd
     . /etc/os-release
@@ -95,29 +80,42 @@ install_homebrew_deps() {
     # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
     OS=$(uname -s)
   fi
-
   if [ `uname` != 'Linux' ] && [ `uname` != 'Darwin' ]; then
     error "Operating system not supported!"
     exit 1
   fi
+}
 
-  if [ "$OS" != 'Darwin' ]; then
-    check_pre_steps OS
+check_pre_steps() {
+  logout_required=0
+  if [ "$OS" == 'Manjaro Linux' ]; then
+    if [ ! -f /etc/security/limits.d/20-custom.conf ]; then
+      info "Manjaro requires an increase in open file limits, applying update to /etc/security/limits.d/20-custom.conf..."
+      sudo echo "* hard nofile 524288\n* soft nofile 16384\n" | sudo tee /etc/security/limits.d/20-custom.conf
+      logout_required=1
+    fi
   fi
+  if [ "$OS" != 'Darwin' ]; then
+    if [ $(getent passwd $USER | awk -F: '{print $NF}') != "/bin/zsh" ]; then
+      info "Setting shell for user $USER to zsh..."
+      sudo usermod --shell /bin/zsh ${USER}
+      logout_required=1
+    fi
+  fi
+  if [ $logout_required -eq 1 ]; then
+    info "Warning: Please re-login to apply system settings to proceed with the install."
+    exit 1
+  fi
+}
 
-  info "Installing homebrew dependencies..."
+install_deps() {
+  info "Installing base dependencies..."
 
-  if [ "$OS" == 'Solus' ]; then
-    info "Solus Linux detected, installing with eopkg..."
-    sudo eopkg -y it -c system.devel && sudo eopkg -y it curl file git
-  elif [ "$OS" == 'Manjaro Linux' ]; then
+  if [ "$OS" == 'Manjaro Linux' ]; then
     info "Manjaro Linux detected, preparing pacman and installing gunzy-init..."
     sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Never/g' /etc/pacman.conf
     sudo pacman-mirrors --geoip --method rank && sudo pacman -Syyu
-    sudo pacman -U --noconfirm https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.4-1-any.pkg.tar.zst
-  elif [ "$OS" == 'Ubuntu' ]; then
-    info "Ubuntu detected, installing with apt..."
-    sudo apt-get install -y build-essential curl file git
+    sudo pacman -U --noconfirm https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.5-1-any.pkg.tar.zst
   elif [ "$OS" == 'Darwin' ]; then
     info "Darwin detected, installing Xcode CLI Tools..."
     xcode-select --install
@@ -152,10 +150,54 @@ install_chezmoi() {
 
   if ! _exists chezmoi; then
     info "Installing Chezmoi..."
-    brew install chezmoi
+    if [ "$OS" == 'Manjaro Linux' ]; then
+      sudo pacman -Sy --asdeps chezmoi
+    elif [ "$OS" == 'Darwin' ]; then
+      brew install chezmoi
+    fi
   else
     success "You already have Chezmoi installed. Skipping..."
   fi
+
+  finish
+}
+
+prepare_1password() {
+  info "Preparing 1password for chezmoi apply..."
+
+  if [ `uname` == 'Darwin' ]; then
+    info "Installing 1password and 1password-cli..."
+    brew install --cask 1password
+    brew install --cask 1password/tap/1password-cli
+    info "Install complete!"
+  else
+    info "Installing 1password and 1password-cli..."
+    if [ "$OS" == 'Manjaro Linux' ]; then
+      sudo pacman -Sy --asdeps 1password 1password-cli pam-u2f
+    fi
+    info "Prepare to press button on Yubikey to register key for U2F unlock..."
+    _pause
+    mkdir -p ~/.config/Yubico
+    pamu2fcfg -o pam://hostname -i pam://hostname > ~/.config/Yubico/u2f_keys
+    info "U2F setup complete!\n"
+    info "Note: to add additional keys, run the following command: \"pamu2fcfg -o pam://hostname -i pam://hostname >> ~/.config/Yubico/u2f_keys\""
+
+    info "Setting up PAM for System Authentication unlock..."
+    if ! grep -Fxq "auth       include      system-auth" /etc/pam.d/polkit-1
+    then
+      error "Error! /etc/pam.d/polkit-1 does not contain expected content. Manual intervention required..."
+      exit 1
+    fi
+    if grep -Fxq "auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname" /etc/pam.d/polkit-1
+    then
+      info "U2F already configured in PAM, skipping..."
+    else
+      sed '/^auth       include      system-auth/i auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname' /etc/pam.d/polkit-1 | sudo tee /etc/pam.d/polkit-1
+    fi
+    info "Setup of PAM for System Authentication unlock complete!"
+  fi
+  info "Sign in to 1password and 1password-cli..."
+  _pause
 
   finish
 }
@@ -174,13 +216,11 @@ chezmoi_apply() {
     chezmoi update --verbose
   fi
   # assume machine is going to be used for development of dotfiles
-  # TODO: Add question to installer to toggle this off.
   info "Updating dotfiles origin to allow development..."
   chezmoi git remote set-url origin $GITHUB_REPO_SSH_REMOTE
 
   finish
 }
-
 
 on_finish() {
   echo
@@ -208,14 +248,14 @@ on_error() {
   exit 1
 }
 
-
-
 main() {
   on_start "$*"
+  get_os_name "$*"
   check_pre_steps "$*"
-  install_homebrew_deps "$*"
+  install_deps "$*"
   install_homebrew "$*"
   install_chezmoi "$*"
+  prepare_1password "$*"
   chezmoi_apply "$*"
   on_finish "$*"
 }

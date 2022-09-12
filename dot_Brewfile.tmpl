@@ -12,7 +12,9 @@ brew "awscli"
 brew "bash"
 {{ end -}}
 brew "cfssl"
+{{ if eq .chezmoi.os "darwin" }}
 brew "chezmoi"
+{{ end -}}
 brew "direnv"
 brew "dog"
 brew "eksctl"

@@ -12,10 +12,13 @@ This dotfiles collection is designed to be self contained within an installed di
 
 * [Manjaro](https://manjaro.org/)
 
-The following distributions have working config but may be incomplete:
+The following distributions once had working config but may be incomplete:
 
-* [Ubuntu](https://ubuntu.com/)
+* [Arch Linux](https://archlinux.org/)
 * [Solus](https://getsol.us/home/)
+* [Ubuntu](https://ubuntu.com/)
+
+I have also used a subset of this on OSX but this is also unmaintained.
 
 Installation
 ------------
