@@ -1,0 +1,3 @@
+{{ if not .local.is_work }}
+{{ onepasswordRead (print "op://Private/gitea-" .chezmoi.hostname "/public_key") "my.1password.com" }}
+{{ end -}}

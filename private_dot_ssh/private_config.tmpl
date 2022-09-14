@@ -1,0 +1,56 @@
+# Security related config, override on a per host basis to support legacy systems.
+# source: https://infosec.mozilla.org/guidelines/openssh#modern
+HashKnownHosts yes
+
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa,ecdsa-sha2-nistp521-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp521,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
+
+KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256
+
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
+
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+# End config
+
+# Extra Test config
+# convert host names to fqdn and then apply Host configuration
+CanonicalizeHostname yes
+CanonicalDomains mgmt.moo.systems
+CanonicalizeMaxDots 0
+
+# Start hosts and matching
+Host github.com
+    User git
+    IdentityFile ~/.ssh/github.pub
+    IdentityAgent ~/.1password/agent.sock
+
+{{ if not .local.is_work }}
+Host gitea.gunzy.xyz
+    User git
+    IdentityFile ~/.ssh/gitea.pub
+    IdentityAgent ~/.1password/agent.sock
+
+# Legacy Flatcar VMs
+Host maestro.mgmt.moo.systems private.mgmt.moo.systems
+    User core
+
+# Temp until NUC is running
+Host capital.mgmt.moo.systems
+    User core
+
+# Legacy Arch VM
+Host cinema.mgmt.moo.systems
+    User ansible
+
+Match Host *.mgmt.moo.systems User ansible
+    IdentityFile ~/.ssh/ansible.pub
+
+Match Host *.mgmt.moo.systems User terraform
+    IdentityFile ~/.ssh/terraform.pub
+
+{{ end -}}
+
+Host *.mgmt.moo.systems *.home.moo.systems
+    User gunzy
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/gunzy.pub
+    IdentityAgent ~/.1password/agent.sock
