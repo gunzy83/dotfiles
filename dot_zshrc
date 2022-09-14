@@ -21,13 +21,16 @@ source $ZPLUG_HOME/init.zsh
 # Oh-My-Zsh core
 zplug "lib/*", from:oh-my-zsh, ignore:"*/vcs_info.zsh"
 
-# # Oh-My-Zsh plugins
+# Oh-My-Zsh plugins
 zplug "plugins/history-substring-search", from:oh-my-zsh
 
-# # Zsh improvements
+# Zsh improvements
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
+
+# Node version manager
+zplug "lukechilds/zsh-nvm"
 
 zplug "~/.zsh/rc", from:local, use:plugin.sh
 

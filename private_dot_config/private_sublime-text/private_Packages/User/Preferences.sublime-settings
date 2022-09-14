@@ -17,15 +17,12 @@
 		"*.zip"
 	],
 	"caret_style": "smooth",
-	"color_scheme": "Packages/ayu/ayu-mirage.sublime-color-scheme",
+	"color_scheme": "ayu-mirage.sublime-color-scheme",
 	"default_browser": "chrome",
 	"ensure_newline_at_eof_on_save": true,
 	"folder_exclude_patterns":
 	[
-		"node_modules",
 		".tmp",
-		"temp-unifi/config/logs",
-		"temp-unifi/config/data/db"
 	],
 	"font_face": "FiraCode Nerd Font Mono",
 	"ignored_packages":
@@ -37,7 +34,7 @@
 		"draw_normal",
 		"draw_active"
 	],
-	"tab_size": 4,
+	"tab_size": 2,
 	"theme": "ayu-mirage.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"ui_native_titlebar": false,

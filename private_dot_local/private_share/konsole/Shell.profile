@@ -14,6 +14,7 @@ Command=/bin/zsh
 Environment=TERM=xterm-256color
 Name=Shell
 Parent=FALLBACK/
+TerminalMargin=0
 TerminalRows=39
 
 [Scrolling]
