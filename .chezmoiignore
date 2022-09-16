@@ -1,6 +1,7 @@
 README.md
 LICENSE
 install.sh
+install_nix.sh
 {{ if ne .chezmoi.os "darwin" }}
 Library/Application Support
 {{ end }}
