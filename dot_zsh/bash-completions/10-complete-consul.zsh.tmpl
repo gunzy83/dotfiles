@@ -1,0 +1,3 @@
+{{ if not .local.is_work }}
+complete -o nospace -C $(brew --prefix)/bin/consul consul
+{{ end -}}
