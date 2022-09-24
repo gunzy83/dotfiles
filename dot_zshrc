@@ -57,3 +57,4 @@ for file in $funcs_chk; do
 done
 
 eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
