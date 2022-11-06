@@ -4,3 +4,4 @@
 .zsh/env/20_snap.zsh
 .zsh/rc/20-complete-consul.zsh
 .zsh/rc/20-complete-vault.zsh
+.zsh/rc/20-complete-chezmoi.zsh

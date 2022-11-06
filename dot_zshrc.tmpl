@@ -9,6 +9,9 @@ export LANGUAGE=en_AU.UTF-8
 # Ensure editor is set
 export EDITOR=vim
 
+# Ensure loading of custom completions
+fpath+=("$HOME/.zsh/completions")
+
 # Source init files before calling ZPLUG
 init_chk=(~/.zsh/init/*.zsh(N))
 for file in $init_chk; do
@@ -58,3 +61,8 @@ done
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
+{{ if (eq .chezmoi.osRelease.id "manjaro") }}
+. /opt/asdf-vm/asdf.sh
+{{ else if (eq .chezmoi.osRelease.id "solus") }}
+. /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
+{{ end }}

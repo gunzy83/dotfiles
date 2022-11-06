@@ -6,6 +6,9 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 tap "little-angry-clouds/homebrew-my-brews"
 brew "act"
+{{ if or (eq .chezmoi.os "darwin") (eq .chezmoi.osRelease.id "solus") }}
+brew "asdf"
+{{ end -}}
 brew "aws-iam-authenticator"
 brew "awscli"
 {{ if eq .chezmoi.os "darwin" }}
