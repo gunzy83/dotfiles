@@ -5,3 +5,4 @@
 .zsh/rc/20-complete-consul.zsh
 .zsh/rc/20-complete-vault.zsh
 .zsh/rc/20-complete-chezmoi.zsh
+.zsh/init/98_nvm_auto.zsh
