@@ -1,6 +1,6 @@
 {{- if (eq .chezmoi.os "linux") -}}
 #!/bin/zsh
-# Add a list of files to the script to force a zplug clear when the list of fonts changes.
+# Add a list of files to the script to force a zplug clear when the list of scripts changes.
 {{ range $file := glob (print $.chezmoi.sourceDir "/dot_zsh/rc/*") }}
 # {{ $file }}
 {{ end }}

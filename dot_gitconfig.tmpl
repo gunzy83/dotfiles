@@ -1,6 +1,14 @@
 [user]
     name = Ross Williams
     email = gunzy83au@gmail.com
+    signingkey = ~/.ssh/git_sign_sk
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
 [core]
     editor = vim
     filemode = false
@@ -33,7 +41,5 @@
 [alias]
     newbranch = "!f(){ if [ -z $@ ]; then echo 'Usage: git newbranch <branch_name>'; else git checkout $(git main) && git sync && git checkout -b $@; fi; };f"
 
-{{ if .local.is_work }}
 [includeIf "gitdir:~/projects/work/"]
     path = ~/.gitconfigwork
-{{ end -}}
