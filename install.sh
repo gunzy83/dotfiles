@@ -91,6 +91,7 @@ check_pre_steps() {
   if [ "$OS" == 'Manjaro Linux' ]; then
     if [ ! -f /etc/security/limits.d/20-custom.conf ]; then
       info "Manjaro requires an increase in open file limits, applying update to /etc/security/limits.d/20-custom.conf..."
+      sudo mkdir -p /etc/security/limits.d
       sudo echo "* hard nofile 524288\n* soft nofile 16384\n" | sudo tee /etc/security/limits.d/20-custom.conf
       logout_required=1
     fi
