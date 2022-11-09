@@ -116,7 +116,7 @@ install_deps() {
     info "Manjaro Linux detected, preparing pacman and installing gunzy-init..."
     sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Never/g' /etc/pacman.conf
     sudo pacman-mirrors --geoip --method rank && sudo pacman -Syyu
-    sudo pacman -U --noconfirm https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.1.0-1-any.pkg.tar.zst
+    sudo pacman -U --noconfirm --needed https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.1.0-1-any.pkg.tar.zst
   elif [ "$OS" == 'Darwin' ]; then
     info "Darwin detected, installing Xcode CLI Tools..."
     xcode-select --install
@@ -152,7 +152,7 @@ install_chezmoi() {
   if ! _exists chezmoi; then
     info "Installing Chezmoi..."
     if [ "$OS" == 'Manjaro Linux' ]; then
-      sudo pacman -Sy --asdeps chezmoi crudini
+      sudo pacman -Sy --asdeps --noconfirm --needed chezmoi crudini
     elif [ "$OS" == 'Darwin' ]; then
       brew install chezmoi
     fi
@@ -174,7 +174,7 @@ prepare_1password() {
   else
     info "Installing 1password and 1password-cli..."
     if [ "$OS" == 'Manjaro Linux' ]; then
-      sudo pacman -Sy --asdeps 1password 1password-cli pam-u2f
+      sudo pacman -Sy --asdeps --noconfirm --needed 1password 1password-cli pam-u2f
     fi
     info "Prepare to press button on Yubikey to register key for U2F unlock..."
     _pause
