@@ -115,7 +115,7 @@ install_deps() {
     info "Manjaro Linux detected, preparing pacman and installing gunzy-init..."
     sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Never/g' /etc/pacman.conf
     sudo pacman-mirrors --geoip --method rank && sudo pacman -Syyu
-    sudo pacman -U --noconfirm https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.0.5-1-any.pkg.tar.zst
+    sudo pacman -U --noconfirm https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.1.0-1-any.pkg.tar.zst
   elif [ "$OS" == 'Darwin' ]; then
     info "Darwin detected, installing Xcode CLI Tools..."
     xcode-select --install
@@ -151,7 +151,7 @@ install_chezmoi() {
   if ! _exists chezmoi; then
     info "Installing Chezmoi..."
     if [ "$OS" == 'Manjaro Linux' ]; then
-      sudo pacman -Sy --asdeps chezmoi
+      sudo pacman -Sy --asdeps chezmoi crudini
     elif [ "$OS" == 'Darwin' ]; then
       brew install chezmoi
     fi
