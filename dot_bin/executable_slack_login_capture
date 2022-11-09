@@ -1,0 +1,13 @@
+#!/bin/bash
+# workaround for https://www.mail-archive.com/kde-bugs-dist@kde.org/msg662850.html
+while true; do
+  command=$(ps -e -o command | grep '/[s]lack' | grep 'magic')
+  if [ -z "$command" ]; then
+    sleep 1
+  else
+    new_command=$(echo "$command" | sed -e 's/\(.*slack:\/\/\)\(.*\)\(\/magic-login\/.*\)/\1\U\2\L\3/')
+    echo "$new_command"
+    eval "$new_command"
+    exit 0
+  fi
+done
