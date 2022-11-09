@@ -1,4 +1,3 @@
-{{ if or (eq .chezmoi.osRelease.id "solus") (eq .chezmoi.os "darwin") -}}
 #compdef tfctl
 
 # zsh completion for tfctl                                -*- shell-script -*-
@@ -176,4 +175,3 @@ _tfctl()
 if [ "$funcstack[1]" = "_tfctl" ]; then
     _tfctl
 fi
-{{ end -}}
