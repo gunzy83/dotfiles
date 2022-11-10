@@ -25,10 +25,6 @@
 		".tmp",
 	],
 	"font_face": "FiraCode Nerd Font Mono",
-	"ignored_packages":
-	[
-		"Vintage",
-	],
 	"indent_guide_options":
 	[
 		"draw_normal",
