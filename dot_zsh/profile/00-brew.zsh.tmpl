@@ -1,0 +1,5 @@
+{{ if or (eq .chezmoi.osRelease.id "manjaro") -}}
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+{{ else if (eq .chezmoi.os "darwin") -}}
+_extend_path "/usr/local/bin"
+{{ end -}}

@@ -1,0 +1,9 @@
+{{ if or (eq .chezmoi.osRelease.id "manjaro") (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+# Source profile files (sourced on login shells, can be long running)
+envs_chk=(~/.zsh/profile/*.zsh(N))
+for file in $envs_chk; do
+  source $file
+done
+
+{{ end -}}
