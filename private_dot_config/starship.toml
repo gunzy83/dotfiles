@@ -25,6 +25,9 @@ $memory_usage\
 $character\
 """
 
+[hostname]
+ssh_symbol = "💻 "
+
 [shlvl]
 disabled = false
 format = "[$symbol$shlvl]($style) "
