@@ -6,3 +6,6 @@
 .zsh/rc/20-complete-vault.zsh
 .zsh/rc/20-complete-chezmoi.zsh
 .zsh/init/98_nvm_auto.zsh
+.bin/aws_op_credential_process
+.bin/k3s_op2execcredential
+.bin/kcc-cache
