@@ -1,5 +1,7 @@
 {{- if (eq .chezmoi.os "linux") -}}
+{{ if not (eq .chezmoi.osRelease.id "ubuntu") -}}
 #!/bin/sh
 systemctl --user daemon-reload
 systemctl --user enable --now yubikey-touch-detector.service
+{{ end -}}
 {{ end -}}

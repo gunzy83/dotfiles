@@ -6,6 +6,9 @@
 [gpg]
     format = ssh
 
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
+
 [commit]
     gpgsign = true
 
@@ -29,7 +32,10 @@
     defaultBranch = master
 
 [alias]
-    main = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+    fix-head-origin = git remote set-head origin --auto
+
+[alias]
+    main = !basename $(git symbolic-ref refs/remotes/origin/HEAD)
 
 [alias]
     tree = log --graph --decorate --pretty=oneline --abbrev-commit

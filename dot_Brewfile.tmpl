@@ -1,5 +1,3 @@
-tap "aquasecurity/trivy"
-tap "gunzy83/custom"
 tap "fluxcd/tap"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
@@ -9,7 +7,6 @@ brew "act"
 {{ if or (eq .chezmoi.os "darwin") (eq .chezmoi.osRelease.id "solus") }}
 brew "asdf"
 {{ end -}}
-brew "aws-iam-authenticator"
 brew "awscli"
 {{ if eq .chezmoi.os "darwin" }}
 brew "bash"
@@ -25,38 +22,24 @@ brew "fluxcd/tap/flux"
 {{ if eq .chezmoi.os "darwin" }}
 brew "git"
 {{ end -}}
-brew "hugo"
 brew "jq"
 brew "kompose"
 brew "krew"
 brew "kubecm"
 brew "kubectx"
 brew "kubeseal"
-brew "octant"
-{{ if .local.is_work }}
+brew "nmap"
 brew "pulumi"
-{{ end -}}
-brew "pyenv"
-brew "pyenv-virtualenv"
-brew "rbw"
 brew "starship"
 {{ if eq .chezmoi.os "darwin" }}
 brew "terminal-notifier"
 {{ end -}}
-brew "tfenv"
 {{ if eq .chezmoi.os "darwin" }}
 brew "tig"
 brew "vim"
 {{ end -}}
 brew "yq"
 brew "zplug"
-brew "aquasecurity/trivy/trivy"
-brew "gunzy83/custom/pyenv-default-packages"
 {{ if not .local.is_work }}
-brew "hashicorp/tap/consul"
-brew "hashicorp/tap/nomad"
-{{ end -}}
 brew "hashicorp/tap/vault"
-brew "little-angry-clouds/homebrew-my-brews/helmenv"
-
-
+{{ end -}}

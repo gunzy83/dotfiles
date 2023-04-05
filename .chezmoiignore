@@ -1,4 +1,4 @@
-README.md
+*.md
 LICENSE
 install.sh
 install_nix.sh

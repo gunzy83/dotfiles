@@ -10,6 +10,6 @@ sudo eopkg it curl file git zsh vim yakuake konsole fontconfig barrier snapd tig
 {{ else if (eq .chezmoi.osRelease.id "ubuntu") -}}
 #!/bin/sh
 sudo apt-get update
-sudo apt-get install build-essential curl file git zsh vim yakuake konsole font-config barrier tig
+sudo apt-get install build-essential build-essential curl file git crudini fontconfig zsh vim tig dnsutils
 {{ end -}}
 {{ end -}}

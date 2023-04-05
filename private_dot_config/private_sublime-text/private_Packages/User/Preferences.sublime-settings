@@ -37,4 +37,8 @@
 	"ui_separator": true,
 	"ui_wide_scrollbars": true,
 	"update_check": false,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
 }

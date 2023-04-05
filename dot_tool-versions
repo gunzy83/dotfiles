@@ -1,4 +1,5 @@
-task 3.17.0
+chezmoi 2.33.0
+task 3.22.0
 awscli system
 kubectl system
 flux2 system
