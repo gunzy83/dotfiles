@@ -80,6 +80,7 @@ us-east-1 = "use1"
 us-east-2 = "use2"
 
 [kubernetes]
+symbol = "🚢 "
 disabled = false
 format = '[$symbol$context( \($namespace\))]($style) '
 
