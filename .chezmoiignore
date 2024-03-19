@@ -1,7 +1,8 @@
 *.md
 LICENSE
 install.sh
-install_nix.sh
+.ansible
+.github
 {{ if ne .chezmoi.os "darwin" }}
 Library/Application Support
 {{ end }}

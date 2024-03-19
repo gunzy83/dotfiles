@@ -1,0 +1,63 @@
+---
+dotfiles_apt_signing_keys:
+  - src: https://apt.releases.teleport.dev/gpg
+    dest: /usr/share/keyrings/teleport-archive-keyring.asc
+
+dotfiles_apt_repos:
+  - repo: "deb https://ppa.launchpadcontent.net/michel-slm/distrobox/ubuntu/ {{ ansible_lsb.codename }} main"
+    filename: "distrobox"
+  - repo: "deb [arch=amd64] https://download.wavebox.app/stable/linux/deb/ amd64/"
+    filename: "wavebox-stable"
+  - repo: "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/ubuntu {{ ansible_lsb.codename }} stable/cloud"
+    filename: "teleport"
+
+dotfiles_apt_packages:
+  - 1password
+  - 1password-cli
+  - ansible
+  - apt-transport-https
+  - barrier
+  - build-essential
+  - chezmoi
+  - crudini
+  - curl
+  - distrobox
+  - dnsutils
+  - file
+  - flatpak
+  - fontconfig
+  - git
+  - gparted
+  - konsole
+  - libpam-u2f
+  - numix-icon-theme-circle
+  - pamu2fcfg
+  - podman
+  - qt5-style-kvantum
+  - software-properties-common
+  - solaar
+  - teleport-ent
+  - tig
+  - vim
+  - wavebox
+  - yakuake
+  - zsh
+
+dotfiles_flatpak_remotes:
+  - name: flathub
+    url: https://flathub.org/repo/flathub.flatpakrepo
+    method: system
+
+dotfiles_flatpak_packages:
+  - com.github.tchx84.Flatseal
+  - com.slack.Slack
+  - com.spotify.Client
+  - us.zoom.Zoom
+  - com.yubico.yubioath
+  - com.github.debauchee.barrier
+  - org.flameshot.Flameshot
+  - com.uploadedlobster.peek
+  - io.beekeeperstudio.Studio
+  - org.kde.filelight
+  - com.google.Chrome
+  - com.github.IsmaelMartinez.teams_for_linux

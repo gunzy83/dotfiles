@@ -86,16 +86,28 @@ get_os_name() {
   fi
 }
 
+check_compat() {
+  info "Checking compatibility..."
+
+  if [ "$OS" == 'Fedora' ]; then
+    info "Fedora detected, checking variant..."
+    if [ "$VARIANT" == 'Kinoite' ]; then
+      info "Kinoite detected, continuing..."
+    elif [ "$VARIANT" == 'Silverblue' ]; then
+      info "Silverblue detected, continuing..."
+    else
+      error "Fedora variant $VARIANT not supported!"
+      exit 1
+    fi
+  elif [ "$OS" == 'Ubuntu' ]; then
+    info "Ubuntu detected, continuing..."
+  elif [ "$OS" == 'Darwin' ]; then
+    info "MacOS detected, minimal support but continuing..."
+  fi
+}
+
 check_pre_steps() {
   logout_required=0
-  if [ "$OS" == 'Manjaro Linux' ]; then
-    if [ ! -f /etc/security/limits.d/20-custom.conf ]; then
-      info "Manjaro requires an increase in open file limits, applying update to /etc/security/limits.d/20-custom.conf..."
-      sudo mkdir -p /etc/security/limits.d
-      sudo echo "* hard nofile 524288\n* soft nofile 16384\n" | sudo tee /etc/security/limits.d/20-custom.conf
-      logout_required=1
-    fi
-  fi
   if [ "$OS" != 'Darwin' ]; then
     if [ $(getent passwd $USER | awk -F: '{print $NF}') != "/bin/zsh" ]; then
       info "Setting shell for user $USER to zsh..."
@@ -110,16 +122,21 @@ check_pre_steps() {
 }
 
 install_deps() {
-  info "Installing base dependencies..."
+  if [ "$OS" != 'Fedora' ]; then
+    info "Installing base dependencies..."
+  fi
 
-  if [ "$OS" == 'Manjaro Linux' ]; then
-    info "Manjaro Linux detected, preparing pacman and installing gunzy-init..."
-    sudo sed -i 's/#RemoteFileSigLevel.*/RemoteFileSigLevel = Never/g' /etc/pacman.conf
-    sudo pacman-mirrors --geoip --method rank && sudo pacman -Syyu
-    sudo pacman -U --noconfirm --needed https://repo.recursive.cloud/arch/repo/x86_64/gunzy-init-0.1.0-1-any.pkg.tar.zst
+  if [ "$OS" == 'Ubuntu' ]; then
+    info "Ubuntu detected, installing dependencies..."
+    sudo apt update
+    sudo apt install -y build-essential ca-certificates crudini curl file fontconfig git gnupg software-properties-common
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt-get install -y ansible
+    finish
   elif [ "$OS" == 'Darwin' ]; then
     info "Darwin detected, installing Xcode CLI Tools..."
     xcode-select --install
+    finish
   else
     error "Linux distribution not supported!"
     exit 2
@@ -129,53 +146,61 @@ install_deps() {
 }
 
 install_homebrew() {
-  info "Trying to detect installed Homebrew..."
-
-  if ! _exists brew; then
-    info "Installing Homebrew..."
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    if [ `uname` != 'Darwin' ]; then
+  if [ "$OS" == 'Darwin' ]; then
+    info "Trying to detect installed Homebrew..."
+    if ! _exists brew; then
+      info "Installing Homebrew..."
+      bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) # on Mac homebrew is installed to a location already on $PATH
+      brew update
+      brew upgrade
+    else
+      success "You already have Homebrew installed. Skipping..."
     fi
-    brew update
-    brew upgrade
-  else
-    success "You already have Homebrew installed. Skipping..."
   fi
-
   finish
 }
 
 install_chezmoi() {
-  info "Trying to detect installed Chezmoi..."
+  if [ "$OS" != 'Fedora' ]; then
+    info "Trying to detect installed Chezmoi..."
 
-  if ! _exists chezmoi; then
-    info "Installing Chezmoi..."
-    if [ "$OS" == 'Manjaro Linux' ]; then
-      sudo pacman -Sy --asdeps --noconfirm --needed chezmoi crudini
-    elif [ "$OS" == 'Darwin' ]; then
-      brew install chezmoi
+    if ! _exists chezmoi; then
+      info "Installing Chezmoi..."
+      if [ "$OS" == 'Ubuntu' ]; then
+        curl -sSL https://raw.githubusercontent.com/upciti/wakemeops/main/assets/install_repository | sudo bash
+        sudo apt install chezmoi
+      elif [ "$OS" == 'Darwin' ]; then
+        brew install chezmoi
+      fi
+    else
+      success "You already have Chezmoi installed. Skipping..."
     fi
-  else
-    success "You already have Chezmoi installed. Skipping..."
   fi
 
   finish
 }
 
-prepare_1password() {
+prepare_1password(){
   info "Preparing 1password for chezmoi apply..."
 
-  if [ `uname` == 'Darwin' ]; then
+  if [ "$OS" == 'Darwin' ]; then
     info "Installing 1password and 1password-cli..."
     brew install --cask 1password
     brew install --cask 1password/tap/1password-cli
     info "Install complete!"
-  else
+  elif [ "$OS" == 'Ubuntu' ]; then
     info "Installing 1password and 1password-cli..."
-    if [ "$OS" == 'Manjaro Linux' ]; then
-      sudo pacman -Sy --asdeps --noconfirm --needed 1password 1password-cli pam-u2f
-    fi
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+    echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
+    sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+    sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+    sudo apt update && sudo apt install 1password 1password-cli libpam-u2f pamu2fcfg
+  fi
+
+  if [ "$OS" != 'Darwin' ]; then
     info "Prepare to press button on Yubikey to register key for U2F unlock..."
     _pause
     mkdir -p ~/.config/Yubico
@@ -183,19 +208,21 @@ prepare_1password() {
     info "U2F setup complete!\n"
     info "Note: to add additional keys, run the following command: \"pamu2fcfg -o pam://hostname -i pam://hostname >> ~/.config/Yubico/u2f_keys\""
 
-    info "Setting up PAM for System Authentication unlock..."
-    if ! grep -Fxq "auth       include      system-auth" /etc/pam.d/polkit-1
-    then
-      error "Error! /etc/pam.d/polkit-1 does not contain expected content. Manual intervention required..."
-      exit 1
+    if [ "$OS" != 'Fedora' ]; then
+      info "Setting up PAM for System Authentication unlock..."
+      if ! grep -Fxq "auth       include      system-auth" /etc/pam.d/polkit-1
+      then
+        error "Error! /etc/pam.d/polkit-1 does not contain expected content. Manual intervention required..."
+        exit 1
+      fi
+      if grep -Fxq "auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname" /etc/pam.d/polkit-1
+      then
+        info "U2F already configured in PAM, skipping..."
+      else
+        sed '/^auth       include      system-auth/i auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname' /etc/pam.d/polkit-1 | sudo tee /etc/pam.d/polkit-1
+      fi
+      info "Setup of PAM for System Authentication unlock complete!"
     fi
-    if grep -Fxq "auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname" /etc/pam.d/polkit-1
-    then
-      info "U2F already configured in PAM, skipping..."
-    else
-      sed '/^auth       include      system-auth/i auth    sufficient    pam_u2f.so cue origin=pam://hostname appid=pam://hostname' /etc/pam.d/polkit-1 | sudo tee /etc/pam.d/polkit-1
-    fi
-    info "Setup of PAM for System Authentication unlock complete!"
   fi
   info "Sign in to 1password and 1password-cli..."
   _pause
@@ -224,8 +251,17 @@ chezmoi_apply() {
 }
 
 on_finish() {
+  if [ "$OS" == 'Ubuntu' ]; then
+    echo
+    echo "Note: If running KDE on Ubuntu, you may want to install the following via the system settings:"
+    echo
+    echo " - applet-betterinlineclock"
+    echo " - applet-window-appmenu"
+    echo " - applet-window-title"
+    echo " - cherry-kde-theme"
+  fi
   echo
-  success "Setup was successfully done!"
+  success "Setup was successful!"
   echo
   echo -ne $RED'-_-_-_-_-_-_-_-_-_-_-_-_-_-_'
   echo -e  $RESET$BOLD',------,'$RESET
@@ -236,7 +272,7 @@ on_finish() {
   echo -ne $CYAN'-_-_-_-_-_-_-_-_-_-_-_-_-_-_'
   echo -e  $RESET$BOLD'""  ""'$RESET
   echo
-  info "P.S: Don't forget to restart a terminal :)"
+  info "P.S: Don't forget to restart your terminal :)"
   echo
 }
 
@@ -252,6 +288,7 @@ on_error() {
 main() {
   on_start "$*"
   get_os_name "$*"
+  check_compat "$*"
   check_pre_steps "$*"
   install_deps "$*"
   install_homebrew "$*"

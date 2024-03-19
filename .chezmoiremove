@@ -1,12 +1,1 @@
-.zsh/env/00_brew.zsh
-.zsh/env/01_pyenv.zsh
-.zsh/env/02_ssh-agent.zsh
-.zsh/env/20_snap.zsh
-.zsh/rc/20-complete-consul.zsh
-.zsh/rc/20-complete-vault.zsh
-.zsh/rc/20-complete-chezmoi.zsh
-.zsh/init/98_nvm_auto.zsh
-.zsh/init/10_pyenv.zsh
-.bin/aws_op_credential_process
-.bin/k3s_op2execcredential
-.bin/kcc-cache
+# Old machines are being reinstalled/provisioned, no files to remove at this time

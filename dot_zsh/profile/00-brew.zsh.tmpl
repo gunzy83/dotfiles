@@ -1,5 +1,3 @@
-{{ if or (eq .chezmoi.osRelease.id "manjaro") (eq .chezmoi.osRelease.id "solus") -}}
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-{{ else if (eq .chezmoi.os "darwin") -}}
+{{ if (eq .chezmoi.os "darwin") -}}
 _extend_path "/usr/local/bin"
 {{ end -}}

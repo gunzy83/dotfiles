@@ -1,0 +1,35 @@
+---
+- name: Include Ubuntu specific vars
+  include_vars: "Ubuntu-vars.yml"
+
+- name: Ensure apt signing keys are installed
+  ansible.builtin.get_url:
+    url: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0644'
+  loop: "{{ dotfiles_apt_signing_keys }}"
+
+- name: Ensure required apt repositories are installed
+  ansible.builtin.apt_repository:
+    repo: "{{ item.repo }}"
+    state: present
+    update_cache: yes
+    filename: "{{ item.filename | default(omit) }}"
+  loop: "{{ dotfiles_apt_repos }}"
+
+- name: Ensure required apt packages are installed
+  ansible.builtin.apt:
+    pkg: "{{ dotfiles_apt_packages }}"
+    state: present
+
+- name: Ensure required Flatpak remotes are installed
+  community.general.flatpak_remote:
+    name: "{{  item.name }}"
+    state: present
+    flatpakrepo_url: "{{ item.url }}"
+    method: "{{ item.method | default(omit) }}"
+  loop: "{{ dotfiles_flatpak_remotes }}"
+
+- name: Ensure required Flatpaks are installed
+  community.general.flatpak:
+    name: "{{ dotfiles_flatpak_packages }}"

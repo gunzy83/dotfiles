@@ -1,0 +1,5 @@
+{{ if ne .chezmoi.os "darwin" -}}
+#!/bin/bash
+v4l2-ctl -d /dev/video4 --set-ctrl=focus_auto=0
+v4l2-ctl -d /dev/video4 --set-ctrl=focus_absolute=0
+{{ end -}}

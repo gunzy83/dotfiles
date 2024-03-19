@@ -1,0 +1,14 @@
+---
+- connection: local
+  gather_facts: yes
+  hosts: localhost
+  #become: true
+  tasks:
+    - name: Include task list in play
+      ansible.builtin.include_tasks: "{{ filename }}"
+      with_first_found:
+        - files:
+            - "{{ ansible_facts['distribution'] }}-tasks.yml"
+          skip: true
+      loop_control:
+        loop_var: filename

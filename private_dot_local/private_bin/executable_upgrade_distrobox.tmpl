@@ -1,0 +1,7 @@
+{{ if ne .chezmoi.os "darwin" -}}
+#!/bin/sh
+distrobox assemble create --replace --file ~/.distrobox.ini
+# handle desktop files that do not show correctly in KDE
+ln -sf ~/.local/share/applications/devbox-code.desktop ~/.local/share/applications/code.desktop
+ln -sf ~/.local/share/applications/devbox-sublime_text.desktop ~/.local/share/applications/sublime_text.desktop
+{{- end }}

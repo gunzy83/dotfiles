@@ -1,0 +1,28 @@
+{{ if ne .chezmoi.os "darwin" -}}
+[devbox]
+image=ghcr.io/gunzy83/devbox:latest
+init=false
+nvidia=false
+root=false
+start_now=true
+pull=true
+exported_apps=code subl lens inkdrop
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/wavebox;
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/op;
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/chezmoi;
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/systemctl;
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/journalctl;
+{{ if eq .chezmoi.osRelease.id "ubuntu" -}}
+
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/apt;
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/apt-get;
+init_hooks=ln -sf /usr/bin/distrobox-host-exec /usr/local/bin/dpkg;
+{{ end -}}
+{{ if eq .chezmoi.osRelease.id "fedora" -}}
+
+init_hooks=ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree;
+init_hooks=ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update;
+{{ end -}}
+
+additional_flags="--env BROWSER=/usr/local/bin/wavebox --env LANG=en_AU.UTF-8 --env GTK_MODULES=unity-gtk-module"
+{{ end -}}

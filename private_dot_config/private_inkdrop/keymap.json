@@ -1,0 +1,12 @@
+{
+  ".CodeMirror textarea": {
+    "alt-shift-up": "editor:select-lines-upward",
+    "alt-shift-down": "editor:select-lines-downward"
+  },
+  ".platform-darwin .CodeMirror.sublime-mode textarea": {
+    "backspace": "editor:delete-char-before"
+  },
+  ".platform-linux .CodeMirror.sublime-mode textarea, .platform-win32 .CodeMirror.sublime-mode textarea": {
+    "backspace": "editor:delete-char-before"
+  }
+}

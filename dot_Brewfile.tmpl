@@ -1,45 +1,16 @@
-tap "fluxcd/tap"
-tap "hashicorp/tap"
+{{ if eq .chezmoi.os "darwin" }}
 tap "homebrew/bundle"
 tap "homebrew/core"
-tap "little-angry-clouds/homebrew-my-brews"
-brew "act"
-{{ if or (eq .chezmoi.os "darwin") (eq .chezmoi.osRelease.id "solus") }}
-brew "asdf"
-{{ end -}}
 brew "awscli"
-{{ if eq .chezmoi.os "darwin" }}
 brew "bash"
-{{ end -}}
-brew "cfssl"
-{{ if eq .chezmoi.os "darwin" }}
 brew "chezmoi"
-{{ end -}}
 brew "direnv"
-brew "dog"
-brew "eksctl"
-brew "fluxcd/tap/flux"
-{{ if eq .chezmoi.os "darwin" }}
+brew "doggo"
 brew "git"
-{{ end -}}
 brew "jq"
-brew "kompose"
-brew "krew"
-brew "kubecm"
-brew "kubectx"
-brew "kubeseal"
 brew "nmap"
-brew "pulumi"
 brew "starship"
-{{ if eq .chezmoi.os "darwin" }}
 brew "terminal-notifier"
-{{ end -}}
-{{ if eq .chezmoi.os "darwin" }}
 brew "tig"
 brew "vim"
-{{ end -}}
-brew "yq"
-brew "zplug"
-{{ if not .local.is_work }}
-brew "hashicorp/tap/vault"
 {{ end -}}

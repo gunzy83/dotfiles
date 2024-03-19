@@ -1,5 +1,8 @@
 #!/bin/zsh
+emulate sh -c 'source /etc/profile'
 # Source environment files (only environment variables for both user sessions and scripts)
+# required in ubuntu only to disable system wide compinit
+export skip_global_compinit=1
 envs_chk=(~/.zsh/env/*.zsh(N))
 for file in $envs_chk; do
 	source $file

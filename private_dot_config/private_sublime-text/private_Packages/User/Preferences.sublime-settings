@@ -18,7 +18,7 @@
 	],
 	"caret_style": "smooth",
 	"color_scheme": "ayu-mirage.sublime-color-scheme",
-	"default_browser": "chrome",
+	"default_browser": "wavebox",
 	"ensure_newline_at_eof_on_save": true,
 	"folder_exclude_patterns":
 	[
@@ -30,6 +30,9 @@
 		"draw_normal",
 		"draw_active"
 	],
+	"show_project_first": true,
+	"show_rel_path": true,
+	"show_full_path": false,
 	"tab_size": 2,
 	"theme": "ayu-mirage.sublime-theme",
 	"translate_tabs_to_spaces": true,
@@ -41,4 +44,5 @@
 	[
 		"Vintage",
 	],
+	"index_files": true,
 }

@@ -1,7 +1,0 @@
-{{ if (eq .chezmoi.osRelease.id "manjaro") -}}
-. /opt/asdf-vm/asdf.sh
-{{ else if or (eq .chezmoi.os "darwin") (eq .chezmoi.osRelease.id "solus") -}}
-. /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
-{{ else -}}
-. "$HOME/.asdf/asdf.sh"
-{{ end -}}
