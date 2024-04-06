@@ -1,0 +1,19 @@
+---
+dotfiles_flatpak_remotes:
+  - name: flathub
+    url: https://flathub.org/repo/flathub.flatpakrepo
+    method: system
+
+dotfiles_flatpak_packages:
+  - com.github.tchx84.Flatseal
+  - com.slack.Slack
+  - com.spotify.Client
+  - us.zoom.Zoom
+  - com.yubico.yubioath
+  - com.github.debauchee.barrier
+  - org.flameshot.Flameshot
+  - com.uploadedlobster.peek
+  - io.beekeeperstudio.Studio
+  - org.kde.filelight
+  - com.google.Chrome
+  - com.github.IsmaelMartinez.teams_for_linux

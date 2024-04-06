@@ -124,25 +124,22 @@ check_pre_steps() {
 install_deps() {
   if [ "$OS" != 'Fedora' ]; then
     info "Installing base dependencies..."
+    if [ "$OS" == 'Ubuntu' ]; then
+      info "Ubuntu detected, installing dependencies..."
+      sudo apt update
+      sudo apt install -y build-essential ca-certificates crudini curl file fontconfig git gnupg software-properties-common
+      sudo add-apt-repository --yes --update ppa:ansible/ansible
+      sudo apt-get install -y ansible
+      finish
+    elif [ "$OS" == 'Darwin' ]; then
+      info "Darwin detected, installing Xcode CLI Tools..."
+      xcode-select --install
+      finish
+    else
+      error "Linux distribution not supported!"
+      exit 2
+    fi
   fi
-
-  if [ "$OS" == 'Ubuntu' ]; then
-    info "Ubuntu detected, installing dependencies..."
-    sudo apt update
-    sudo apt install -y build-essential ca-certificates crudini curl file fontconfig git gnupg software-properties-common
-    sudo add-apt-repository --yes --update ppa:ansible/ansible
-    sudo apt-get install -y ansible
-    finish
-  elif [ "$OS" == 'Darwin' ]; then
-    info "Darwin detected, installing Xcode CLI Tools..."
-    xcode-select --install
-    finish
-  else
-    error "Linux distribution not supported!"
-    exit 2
-  fi
-
-  finish
 }
 
 install_homebrew() {
@@ -157,8 +154,8 @@ install_homebrew() {
     else
       success "You already have Homebrew installed. Skipping..."
     fi
+    finish
   fi
-  finish
 }
 
 install_chezmoi() {
@@ -176,9 +173,8 @@ install_chezmoi() {
     else
       success "You already have Chezmoi installed. Skipping..."
     fi
+    finish
   fi
-
-  finish
 }
 
 prepare_1password(){
@@ -201,11 +197,15 @@ prepare_1password(){
   fi
 
   if [ "$OS" != 'Darwin' ]; then
-    info "Prepare to press button on Yubikey to register key for U2F unlock..."
-    _pause
-    mkdir -p ~/.config/Yubico
-    pamu2fcfg -o pam://hostname -i pam://hostname > ~/.config/Yubico/u2f_keys
-    info "U2F setup complete!\n"
+    if [ ! -f ~/.config/Yubico/u2f_keys ]; then
+      info "Prepare to press button on Yubikey to register key for U2F unlock..."
+      _pause
+      mkdir -p ~/.config/Yubico
+      pamu2fcfg -o pam://hostname -i pam://hostname > ~/.config/Yubico/u2f_keys
+      info "U2F setup complete!\n"
+    else
+      info "U2F keys already registered, skipping..."
+    fi
     info "Note: to add additional keys, run the following command: \"pamu2fcfg -o pam://hostname -i pam://hostname >> ~/.config/Yubico/u2f_keys\""
 
     if [ "$OS" != 'Fedora' ]; then
@@ -224,7 +224,7 @@ prepare_1password(){
       info "Setup of PAM for System Authentication unlock complete!"
     fi
   fi
-  info "Sign in to 1password and 1password-cli..."
+  info "Ensure you are signed into 1password and 1password-cli now..."
   _pause
 
   finish

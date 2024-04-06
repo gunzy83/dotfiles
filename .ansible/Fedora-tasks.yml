@@ -1,0 +1,15 @@
+---
+- name: Include Ubuntu specific vars
+  include_vars: "Fedora-vars.yml"
+
+- name: Ensure required Flatpak remotes are installed
+  community.general.flatpak_remote:
+    name: "{{  item.name }}"
+    state: present
+    flatpakrepo_url: "{{ item.url }}"
+    method: "{{ item.method | default(omit) }}"
+  loop: "{{ dotfiles_flatpak_remotes }}"
+
+- name: Ensure required Flatpaks are installed
+  community.general.flatpak:
+    name: "{{ dotfiles_flatpak_packages }}"
