@@ -8,7 +8,7 @@
       ansible.builtin.include_tasks: "{{ filename }}"
       with_first_found:
         - files:
-            - "{{ ansible_facts['distribution'] }}-tasks.yml"
+            - "{{ ansible_facts['distribution'] | lower }}-tasks.yml"
           skip: true
       loop_control:
         loop_var: filename

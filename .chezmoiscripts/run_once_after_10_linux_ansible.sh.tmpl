@@ -1,8 +1,8 @@
 {{- if (eq .chezmoi.os "linux") -}}
 #!/bin/sh
 # provision-host.yml hash: {{ include (print $.chezmoi.sourceDir "/.ansible/provision-host.yml") | sha256sum }}
-# os tasks hash: {{ include (print $.chezmoi.sourceDir "/.ansible/" $.chezmoi.osRelease.name "-tasks.yml") | sha256sum }}
-# os vars hash: {{ include (print $.chezmoi.sourceDir "/.ansible/" $.chezmoi.osRelease.name "-vars.yml") | sha256sum }}
+# os tasks hash: {{ include (print $.chezmoi.sourceDir "/.ansible/" $.chezmoi.osRelease.id "-tasks.yml") | sha256sum }}
+# os vars hash: {{ include (print $.chezmoi.sourceDir "/.ansible/" $.chezmoi.osRelease.id "-vars.yml") | sha256sum }}
 cd {{ .chezmoi.sourceDir }}/.ansible
 sudo ansible-playbook -i local provision-host.yml
 {{ end -}}

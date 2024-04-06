@@ -1,6 +1,6 @@
 ---
 - name: Include Ubuntu specific vars
-  include_vars: "Fedora-vars.yml"
+  include_vars: "fedora-vars.yml"
 
 - name: Ensure required Flatpak remotes are installed
   community.general.flatpak_remote:

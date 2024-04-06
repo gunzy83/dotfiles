@@ -1,6 +1,6 @@
 ---
 - name: Include Ubuntu specific vars
-  include_vars: "Ubuntu-vars.yml"
+  include_vars: "ubuntu-vars.yml"
 
 - name: Ensure apt signing keys are installed
   ansible.builtin.get_url:
