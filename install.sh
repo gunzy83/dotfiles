@@ -89,7 +89,7 @@ get_os_name() {
 check_compat() {
   info "Checking compatibility..."
 
-  if [ "$OS" == 'Fedora' ]; then
+  if [ "$OS" == 'Fedora Linux' ]; then
     info "Fedora detected, checking variant..."
     if [ "$VARIANT" == 'Kinoite' ]; then
       info "Kinoite detected, continuing..."
@@ -122,7 +122,7 @@ check_pre_steps() {
 }
 
 install_deps() {
-  if [ "$OS" != 'Fedora' ]; then
+  if [ "$OS" != 'Fedora Linux' ]; then
     info "Installing base dependencies..."
     if [ "$OS" == 'Ubuntu' ]; then
       info "Ubuntu detected, installing dependencies..."
@@ -159,7 +159,7 @@ install_homebrew() {
 }
 
 install_chezmoi() {
-  if [ "$OS" != 'Fedora' ]; then
+  if [ "$OS" != 'Fedora Linux' ]; then
     info "Trying to detect installed Chezmoi..."
 
     if ! _exists chezmoi; then
@@ -208,7 +208,7 @@ prepare_1password(){
     fi
     info "Note: to add additional keys, run the following command: \"pamu2fcfg -o pam://hostname -i pam://hostname >> ~/.config/Yubico/u2f_keys\""
 
-    if [ "$OS" != 'Fedora' ]; then
+    if [ "$OS" != 'Fedora Linux' ]; then
       info "Setting up PAM for System Authentication unlock..."
       if ! grep -Fxq "auth       include      system-auth" /etc/pam.d/polkit-1
       then
