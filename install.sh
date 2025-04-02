@@ -102,7 +102,7 @@ check_compat() {
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Ubuntu detected, continuing..."
   elif [ "$OS" == 'Darwin' ]; then
-    info "MacOS detected, minimal support but continuing..."
+    info "MacOS detected, continuing..."
   fi
 }
 
@@ -180,9 +180,8 @@ prepare_1password(){
   info "Preparing 1password for chezmoi apply..."
 
   if [ "$OS" == 'Darwin' ]; then
-    info "Installing 1password and 1password-cli..."
-    brew install --cask 1password
-    brew install --cask 1password/tap/1password-cli
+    info "Installing 1password-cli..."
+    brew install --cask 1password-cli
     info "Install complete!"
   elif [ "$OS" == 'Ubuntu' ]; then
     info "Installing 1password and 1password-cli..."

@@ -1,9 +1,11 @@
 {{ if eq .chezmoi.os "darwin" }}
 tap "homebrew/core"
 tap "tink-crypto/tink-tinkey", "https://github.com/tink-crypto/tink-tinkey"
+brew "asdf"
 brew "awscli"
 brew "bash"
 brew "chezmoi"
+brew "coreutils"
 brew "direnv"
 brew "doggo"
 brew "gh"
@@ -18,4 +20,5 @@ brew "terminal-notifier"
 brew "tinkey"
 brew "tig"
 brew "vim"
+cask "1password-cli"
 {{ end -}}
