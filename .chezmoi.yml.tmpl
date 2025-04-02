@@ -1,8 +1,15 @@
-{{- $desktop := promptBool "Is this machine a desktop" -}}
-{{- $work := promptBool "Is this machine a work machine" -}}
+{{- $desktop := promptBool "Is this machine a desktop?" -}}
+{{- $work := promptBool "Is this machine a work machine?" -}}
+{{- $primary := (and ($work) (promptBool "Is this machine the primary work machine?")) -}}
 data:
   local:
     is_desktop: {{ $desktop }}
     is_work: {{ $work }}
+    is_primary: {{ $primary }}
+{{- if eq .chezmoi.os "darwin" }}
+    machine_name: {{ output "scutil" "--get" "ComputerName" | trim | replace " " "-" | lower }}
+{{- else }}
+    machine_name: {{ .local.machine_name }}
+{{- end }}
 
 pager: "less -R"

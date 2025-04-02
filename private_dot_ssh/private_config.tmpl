@@ -14,14 +14,8 @@ Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.
 # Extra Test config
 # convert host names to fqdn and then apply Host configuration
 CanonicalizeHostname yes
-CanonicalDomains mgmt.moo.systems
+CanonicalDomains mgmt.gunzy.xyz
 CanonicalizeMaxDots 0
-
-# Start hosts and matching
-Host github.com
-    User git
-    IdentityFile ~/.ssh/github.pub
-    IdentityAgent ~/.1password/agent.sock
 
 {{ if not .local.is_work }}
 Host gitea.gunzy.xyz
@@ -30,23 +24,41 @@ Host gitea.gunzy.xyz
     IdentityAgent ~/.1password/agent.sock
 
 # Legacy Flatcar VMs
-Host maestro.mgmt.moo.systems private.mgmt.moo.systems
+Host maestro.mgmt.gunzy.xyz private.mgmt.gunzy.xyz
     User core
 
 # Legacy Arch VM
-Host cinema.mgmt.moo.systems
+Host cinema.mgmt.gunzy.xyz
     User ansible
 
-Match Host *.mgmt.moo.systems User ansible
+Match Host *.mgmt.gunzy.xyz User ansible
     IdentityFile ~/.ssh/ansible.pub
 
-Match Host *.mgmt.moo.systems User terraform
+Match Host *.mgmt.gunzy.xyz User terraform
     IdentityFile ~/.ssh/terraform.pub
 
-{{ end -}}
-
-Host *.mgmt.moo.systems *.home.moo.systems
+Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
     User gunzy
     IdentitiesOnly yes
     IdentityFile ~/.ssh/gunzy.pub
     IdentityAgent ~/.1password/agent.sock
+{{ end -}}
+
+# Github
+Host github.com
+    Hostname github.com
+    IdentityFile ~/.ssh/github.pub
+    IdentityAgent ~/.1password/agent.sock
+    IdentitiesOnly yes
+
+{{ if .local.is_work -}}
+{{ if .local.is_primary -}}
+{{ $githuborg := onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/github-org") "my.1password.com" -}}
+Host {{ $githuborg }}
+    Hostname github.com
+    IdentityFile ~/.ssh/github-external.pub
+    IdentityAgent ~/.1password/agent.sock
+    IdentitiesOnly yes
+
+{{ end -}}
+{{ end -}}

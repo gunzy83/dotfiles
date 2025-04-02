@@ -1,0 +1,39 @@
+{{ if .local.is_work -}}
+{{ $org2_key_name := onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/key-name") "my.1password.com" }}
+{{ if .local.is_primary -}}
+[[ssh-keys]]
+item = "github-{{ .local.machine_name -}}-{{ $org2_key_name }}"
+vault = "Private"
+
+[[ssh-keys]]
+item = "github-{{ .local.machine_name -}}"
+vault = "Private"
+
+{{ else -}}
+[[ssh-keys]]
+item = "github-{{ .local.machine_name -}}"
+vault = "Private"
+
+{{ end -}}
+{{ else -}}
+[[ssh-keys]]
+item = "github-{{ .local.machine_name -}}"
+vault = "Private"
+
+[[ssh-keys]]
+item = "gitea-{{ .local.machine_name -}}"
+vault = "Private"
+
+[[ssh-keys]]
+item = "gunzy-{{ .local.machine_name -}}"
+vault = "Private"
+
+[[ssh-keys]]
+item = "ansible"
+vault = "Private"
+
+[[ssh-keys]]
+item = "terraform"
+vault = "Private"
+
+{{ end -}}

@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.os "darwin" }}
+fontconfig/**
+sublime-text/**
+yubikey-touch-detector/**
+{{ end }}

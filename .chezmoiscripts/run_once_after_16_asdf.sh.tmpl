@@ -1,6 +1,6 @@
 #!/bin/sh
 # .tool-versions hash: {{ include (print $.chezmoi.homeDir "/.tool-versions") | sha256sum }}
-{{- if (eq .chezmoi.os "linux") -}}
+{{ if (eq .chezmoi.os "linux") -}}
 distrobox-enter -n devbox -- zsh -c "cut -d' ' -f1 $HOME/.tool-versions | xargs -I{} /opt/asdf-vm/bin/asdf plugin add {} || true"
 distrobox-enter -n devbox -- zsh -c "/opt/asdf-vm/bin/asdf install"
 {{- else if (eq .chezmoi.os "darwin") -}}

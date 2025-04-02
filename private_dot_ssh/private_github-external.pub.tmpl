@@ -1,0 +1,6 @@
+{{ if .local.is_work -}}
+{{ if .local.is_primary -}}
+{{ $org2_key_name := onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/key-name") "my.1password.com" -}}
+{{ onepasswordRead (print "op://Private/github-" .local.machine_name "-" $org2_key_name "/public_key") "my.1password.com" }}
+{{ end -}}
+{{ end -}}

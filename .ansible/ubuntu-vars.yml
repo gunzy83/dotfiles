@@ -61,3 +61,4 @@ dotfiles_flatpak_packages:
   - org.kde.filelight
   - com.google.Chrome
   - com.github.IsmaelMartinez.teams_for_linux
+  - com.discordapp.Discord

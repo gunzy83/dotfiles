@@ -11,7 +11,7 @@ DefaultEncoding=UTF-8
 
 [General]
 Command=/bin/zsh
-Environment=TERM=xterm-256color
+Environment=TERM=xterm-256color,SHLVL=0
 Name=Shell
 Parent=FALLBACK/
 TerminalMargin=0

@@ -1,0 +1,2 @@
+[includeIf "gitdir:~/projects/{{ onepasswordRead (print "op://Private/" .op_entry "/working-directory") "my.1password.com" -}}/"]
+    path = {{ .included_file -}}

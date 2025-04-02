@@ -46,5 +46,11 @@
 [alias]
     newbranch = "!f(){ if [ -z $@ ]; then echo 'Usage: git newbranch <branch_name>'; else git checkout $(git main) && git sync && git checkout -b $@; fi; };f"
 
-[includeIf "gitdir:~/projects/work/"]
-    path = ~/.gitconfigwork
+{{ if .local.is_work -}}
+{{ if .local.is_primary -}}
+{{ template "org-gitconfig-include-if" dict "op_entry" "jxyeahxa67ygphrtxfwm644jei" "included_file" "~/.gitconfigwork" }}
+{{ template "org-gitconfig-include-if" dict "op_entry" "p3dbnfqnt64sia2ua7m3rihdxq" "included_file" "~/.gitconfigexternal" }}
+{{ else -}}
+{{ template "org-gitconfig-include-if" dict "op_entry" "p3dbnfqnt64sia2ua7m3rihdxq" "included_file" "~/.gitconfigwork" -}}
+{{ end -}}
+{{ end -}}

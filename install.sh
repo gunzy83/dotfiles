@@ -148,7 +148,6 @@ install_homebrew() {
     if ! _exists brew; then
       info "Installing Homebrew..."
       bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) # on Mac homebrew is installed to a location already on $PATH
       brew update
       brew upgrade
     else

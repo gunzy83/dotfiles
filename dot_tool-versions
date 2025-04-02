@@ -1,7 +1,9 @@
+auth0-cli 1.4.0
 awscli system
 github-cli system
 golang 1.22.1
 helm 3.13.2
+java openjdk-23.0.2
 jq system
 krew 0.4.4
 kube-credential-cache 0.5.1
@@ -10,5 +12,6 @@ kubectl 1.27.8
 kubectx 0.9.5
 nodejs 20.11.1
 python system
+task 3.42.1
 teleport-ent system
 yq 4.33.3

@@ -1,0 +1,5 @@
+[user]
+    email = {{ onepasswordRead (print "op://Private/" . "/email") "my.1password.com" }}
+
+[init]
+    defaultBranch = {{ onepasswordRead (print "op://Private/" . "/default-branch") "my.1password.com" }}
