@@ -4,8 +4,8 @@
 distrobox-enter -n devbox -- zsh -c "cut -d' ' -f1 $HOME/.tool-versions | xargs -I{} /opt/asdf-vm/bin/asdf plugin add {} || true"
 distrobox-enter -n devbox -- zsh -c "/opt/asdf-vm/bin/asdf install"
 {{- else if (eq .chezmoi.os "darwin") -}}
-. "$HOME/.asdf/asdf.sh"
 cd $HOME
 cut -d' ' -f1 $HOME/.tool-versions | xargs -I{} asdf plugin add {} || true
-asdf install
+# Should be asdf install, https://github.com/asdf-vm/asdf/issues/1930
+grep -v system $HOME/.tool-versions | xargs -I{} bash -c "asdf install {}"
 {{ end }}
