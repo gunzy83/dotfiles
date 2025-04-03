@@ -1,3 +1,9 @@
 {{ if (eq .chezmoi.os "darwin") -}}
+{{ if eq .chezmoi.arch "arm64" -}}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+_extend_path "/opt/homebrew/bin"
+{{ else -}}
+eval "$(/usr/local/bin/brew shellenv)"
 _extend_path "/usr/local/bin"
+{{ end -}}
 {{ end -}}

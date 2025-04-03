@@ -132,8 +132,14 @@ install_deps() {
       sudo apt-get install -y ansible
       finish
     elif [ "$OS" == 'Darwin' ]; then
-      info "Darwin detected, installing Xcode CLI Tools..."
-      xcode-select --install
+      info "Darwin detected!"
+      info "Checking for Xcode CLI tools..."
+      if xcode-select -p > /dev/null 2>&1 ; then
+        info "Xcode CLI tools already installed. Skipping..."
+      else
+        info "Xcode CLI tools not found. Installing..."
+        xcode-select --install
+      fi
       finish
     else
       error "Linux distribution not supported!"
@@ -148,6 +154,7 @@ install_homebrew() {
     if ! _exists brew; then
       info "Installing Homebrew..."
       bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      [[ $(arch) == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)" || eval "$(/usr/local/bin/brew shellenv)"
       brew update
       brew upgrade
     else
