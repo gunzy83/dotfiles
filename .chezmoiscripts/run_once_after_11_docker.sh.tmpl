@@ -1,3 +1,4 @@
+{{- if (eq .chezmoi.os "linux") -}}
 {{ if eq .chezmoi.osRelease.id "ubuntu" -}}
 #!/bin/sh
 sudo apt-get install ca-certificates curl gnupg
@@ -11,4 +12,5 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo groupadd docker || true
 sudo usermod -aG docker $USER
-{{ end }}
+{{ end -}}
+{{ end -}}
