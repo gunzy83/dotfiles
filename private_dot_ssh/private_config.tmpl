@@ -48,7 +48,11 @@ Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
 Host github.com
     Hostname github.com
     IdentityFile ~/.ssh/github.pub
+{{- if (eq .chezmoi.os "darwin") }}
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- else }}
     IdentityAgent ~/.1password/agent.sock
+{{ end }}
     IdentitiesOnly yes
 
 {{ if .local.is_work -}}
@@ -57,7 +61,11 @@ Host github.com
 Host {{ $githuborg }}
     Hostname github.com
     IdentityFile ~/.ssh/github-external.pub
+{{- if (eq .chezmoi.os "darwin") }}
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- else }}
     IdentityAgent ~/.1password/agent.sock
+{{ end }}
     IdentitiesOnly yes
 
 {{ end -}}
