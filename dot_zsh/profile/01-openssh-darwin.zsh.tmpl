@@ -1,0 +1,3 @@
+{{ if (eq .chezmoi.os "darwin") -}}
+_extend_path "$(brew --prefix openssh)/bin"
+{{ end -}}
