@@ -6,7 +6,6 @@ export LANGUAGE=en_AU.UTF-8
 export EDITOR=vim
 
 # Source personal aliases/functions
-source ~/.zsh/path.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/functions.zsh
 
