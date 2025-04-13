@@ -59,9 +59,9 @@ bisect = " BISECTING"
 
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'
-ahead = "ﰵ${count}"
-diverged = "ﰵ${ahead_count}ﰬ${behind_count}"
-behind = "ﰬ${count}"
+ahead = "${count}"
+diverged = "${ahead_count}${behind_count}"
+behind = "${count}"
 conflicted = ""
 
 [hg_branch]

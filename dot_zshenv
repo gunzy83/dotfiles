@@ -1,5 +1,7 @@
 #!/bin/zsh
 emulate sh -c 'source /etc/profile'
+# Add the _extend_path function to the path
+source ~/.zsh/path.zsh
 # Source environment files (only environment variables for both user sessions and scripts)
 # required in ubuntu only to disable system wide compinit
 export skip_global_compinit=1

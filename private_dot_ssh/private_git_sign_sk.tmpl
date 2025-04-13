@@ -1,1 +1,1 @@
-{{ onepasswordRead (print "op://Private/git-sign-sk/private_key_b64") "my.1password.com" | b64dec -}}
+{{ onepasswordRead (print "op://Private/git-sign-sk" .local.git_signing_key_index "/private_key_b64") "my.1password.com" | b64dec -}}

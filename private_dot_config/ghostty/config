@@ -1,0 +1,8 @@
+theme = "Ayu Mirage"
+initial-window=false
+keybind = global:f12=toggle_quick_terminal
+quick-terminal-screen = macos-menu-bar
+quick-terminal-autohide = false
+font-family = "FiraCode Nerd Font Mono Ret"
+font-size = 14
+bold-is-bright = true

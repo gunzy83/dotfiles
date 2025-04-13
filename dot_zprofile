@@ -1,6 +1,4 @@
 #!/bin/zsh
-# Add the _extend_path function to the path
-source ~/.zsh/path.zsh
 # Source profile files (sourced on login shells, can be long running)
 envs_chk=(~/.zsh/profile/*.zsh(N))
 for file in $envs_chk; do

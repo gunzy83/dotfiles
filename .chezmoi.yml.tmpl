@@ -1,6 +1,8 @@
 {{- $desktop := promptBool "Is this machine a desktop?" -}}
 {{- $work := promptBool "Is this machine a work machine?" -}}
 {{- $primary := (and ($work) (promptBool "Is this machine the primary work machine?")) -}}
+{{- $choices := list "1" "2" -}}
+{{- $git_signing_key := promptChoice "Which Yubikey are you using for signing?" $choices -}}
 data:
   local:
     is_desktop: {{ $desktop }}
@@ -11,5 +13,6 @@ data:
 {{- else }}
     machine_name: {{ .local.machine_name }}
 {{- end }}
+    git_signing_key_index: {{ $git_signing_key }}
 
 pager: "less -R"

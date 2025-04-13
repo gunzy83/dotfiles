@@ -9,8 +9,8 @@ Dotfiles for my workstations, with a focus on engineering and development toolin
 This dotfiles collection is designed to be self contained within an installed distribution of Linux and used within a [distrobox](https://distrobox.it/) container. This set of configuration is known to work on the following Operating Systems:
 
 
-- [Fedora Kinoite](https://fedoraproject.org/kinoite/)
 - [MacOS](https://www.apple.com/macos/)
+- [Fedora Kinoite](https://fedoraproject.org/kinoite/)
 
 and in the following distrobox container image:
 
