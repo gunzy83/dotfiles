@@ -14,4 +14,5 @@ nodejs 20.11.1
 python 3.13.2
 task 3.42.1
 teleport-ent 17.4.2
-yq 4.33.3
+yq 4.46.1
+gum 0.16.0

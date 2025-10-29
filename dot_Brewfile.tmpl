@@ -1,5 +1,7 @@
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
+{{- if .local.is_work }}
 tap "tink-crypto/tink-tinkey", "https://github.com/tink-crypto/tink-tinkey"
+{{- end }}
 brew "asdf"
 brew "awscli"
 brew "bash"
@@ -8,21 +10,56 @@ brew "coreutils"
 brew "direnv"
 brew "doggo"
 brew "gh"
+brew "gnupg"
 brew "git"
 brew "jq"
+{{- if .local.is_work }}
 brew "jwt-cli"
+{{- end }}
+brew "k3d"
 brew "k9s"
+brew "libpq"
+brew "nmap"
+{{- if .local.is_work }}
+brew "mysql@8.4"
+{{- end }}
 brew "nmap"
 brew "openssh"
+{{- if .local.is_work }}
 brew "rustup"
+{{- end }}
 brew "starship"
 brew "terminal-notifier"
+{{- if .local.is_work }}
 brew "tink-crypto/tink-tinkey/tinkey"
+{{- end }}
 brew "tig"
 brew "vim"
+brew "zsh"
+{{- if not .local.is_work }}
+cask "1password"
+{{- end }}
 cask "1password-cli"
+cask "capacities"
+cask "discord"
 cask "font-fira-code-nerd-font"
+cask "ghostty"
 cask "maccy"
+{{- if not .local.is_work }}
+cask "openlens"
+{{- end }}
 cask "scroll-reverser"
+{{- if .local.is_work }}
 cask "session-manager-plugin"
-{{ end -}}
+{{- end }}
+{{- if not .local.is_work }}
+cask "slack"
+cask "spotify"
+cask "visual-studio-code"
+{{- end }}
+cask "wireshark-app"
+cask "yubico-authenticator"
+{{- if not .local.is_work }}
+cask "yubico-yubikey-manager"
+{{- end }}
+{{- end }}

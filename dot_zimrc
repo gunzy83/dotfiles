@@ -6,6 +6,8 @@ zmodule joke/zim-helm
 zmodule joke/zim-kubectl # may need to fork to remove aliases
 zmodule joke/zim-starship
 zmodule joke/zim-yq
+zmodule environment
+zmodule input
 zmodule utility
 zmodule zsh-users/zsh-completions --fpath src
 zmodule ahmetb/kubectx --fpath completion
@@ -15,5 +17,3 @@ zmodule 3v1n0/zsh-bash-completions-fallback
 zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
-zmodule input
-zmodule environment

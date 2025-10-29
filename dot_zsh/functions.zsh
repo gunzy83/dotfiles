@@ -7,5 +7,10 @@ ipinfo() {
 
 # Generate a password. Length is 20 unless specified.
 passwordgen() {
-    tr -cd '[:alnum:]' < /dev/urandom | fold -w${@:-20} | head -n1
+    export LC_ALL=C; tr -cd '[:alnum:]' < /dev/urandom | fold -w${@:-20} | head -n1
+}
+
+jwt-decode() {
+    JWT="$1"
+    jq -R 'split(".") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< $JWT
 }

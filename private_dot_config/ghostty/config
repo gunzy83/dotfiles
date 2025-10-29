@@ -6,3 +6,4 @@ quick-terminal-autohide = false
 font-family = "FiraCode Nerd Font Mono Ret"
 font-size = 14
 bold-is-bright = true
+quick-terminal-size = 85%
