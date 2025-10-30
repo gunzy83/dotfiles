@@ -1,5 +1,4 @@
 theme = "Ayu Mirage"
-initial-window=false
 keybind = global:f12=toggle_quick_terminal
 quick-terminal-screen = macos-menu-bar
 quick-terminal-autohide = false
