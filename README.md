@@ -20,7 +20,7 @@ It is also known to work on the following Linux distributions but configuration 
 To set up a new machine, you will need to follow these steps before running the install script:
 
 * Determine or set the hostname on the new machine
-  * On MacOS, this can be done via System Settings > Sharing > Computer Name
+  * On MacOS, this can be done via System Settings > General > About > Name
   * On Linux, this can be done via `sudo hostnamectl set-hostname <hostname>`
 * Create new SSH keys for the machine in 1Password
   * A key for Github access: `github-<hostname>`
