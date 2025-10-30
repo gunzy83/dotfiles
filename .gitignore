@@ -5,3 +5,4 @@
 .uuid
 chezmoi.yml
 .DS_Store
+.local-notes.md

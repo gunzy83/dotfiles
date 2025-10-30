@@ -52,14 +52,10 @@
     title-blur = color8 color12
 
 {{ if .local.is_work -}}
-{{ if .local.is_primary -}}
 {{ template "org-gitconfig-include-if" dict "op_entry" "jxyeahxa67ygphrtxfwm644jei" "included_file" "~/.gitconfigwork" }}
 {{ template "org-gitconfig-include-if" dict "op_entry" "p3dbnfqnt64sia2ua7m3rihdxq" "included_file" "~/.gitconfigexternal" }}
 {{ $githuborg := onepasswordRead (print "op://Private/jxyeahxa67ygphrtxfwm644jei/github-org") "my.1password.com" }}
 [url "ssh://git@github.com/{{ $githuborg -}}/"]
     insteadOf = https://github.com/{{ $githuborg -}}/
 
-{{ else -}}
-{{ template "org-gitconfig-include-if" dict "op_entry" "p3dbnfqnt64sia2ua7m3rihdxq" "included_file" "~/.gitconfigwork" -}}
-{{ end -}}
 {{ end -}}

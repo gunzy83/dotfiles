@@ -3,11 +3,7 @@
 mkdir -p ~/projects/personal
 mkdir -p ~/projects/third-party
 {{ if .local.is_work -}}
-{{ if .local.is_primary -}}
 mkdir -p ~/projects/{{ onepasswordRead (print "op://Private/jxyeahxa67ygphrtxfwm644jei/working-directory") "my.1password.com" }}
 mkdir -p ~/projects/{{ onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/working-directory") "my.1password.com" }}
 echo "export PULUMI_HOME=~/.pulumi-{{ onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/working-directory") "my.1password.com" -}}" > ~/projects/{{ onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/working-directory") "my.1password.com" -}}/.envrc
-{{ else -}}
-mkdir -p ~/projects/{{ onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/working-directory") "my.1password.com" -}}
-{{ end -}}
 {{ end -}}

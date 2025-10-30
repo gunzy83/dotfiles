@@ -1,17 +1,15 @@
 {{- $desktop := promptBool "Is this machine a desktop?" -}}
 {{- $work := promptBool "Is this machine a work machine?" -}}
-{{- $primary := (and ($work) (promptBool "Is this machine the primary work machine?")) -}}
 {{- $choices := list "1" "2" -}}
 {{- $git_signing_key := promptChoice "Which Yubikey are you using for signing?" $choices -}}
 data:
   local:
     is_desktop: {{ $desktop }}
     is_work: {{ $work }}
-    is_primary: {{ $primary }}
 {{- if eq .chezmoi.os "darwin" }}
     machine_name: {{ output "scutil" "--get" "ComputerName" | trim | replace " " "-" | lower }}
 {{- else }}
-    machine_name: {{ .local.machine_name }}
+    machine_name: {{ .chezmoi.hostname }}
 {{- end }}
     git_signing_key_index: {{ $git_signing_key }}
 

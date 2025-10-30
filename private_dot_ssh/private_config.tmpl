@@ -9,34 +9,10 @@ KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384
 MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
 
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
-# End config
-
-# Extra Test config
-# convert host names to fqdn and then apply Host configuration
-CanonicalizeHostname yes
-CanonicalDomains mgmt.gunzy.xyz
-CanonicalizeMaxDots 0
+# End security related config
 
 {{ if not .local.is_work }}
-Host gitea.gunzy.xyz
-    User git
-    IdentityFile ~/.ssh/gitea.pub
-    IdentityAgent ~/.1password/agent.sock
-
-# Legacy Flatcar VMs
-Host maestro.mgmt.gunzy.xyz private.mgmt.gunzy.xyz
-    User core
-
-# Legacy Arch VM
-Host cinema.mgmt.gunzy.xyz
-    User ansible
-
-Match Host *.mgmt.gunzy.xyz User ansible
-    IdentityFile ~/.ssh/ansible.pub
-
-Match Host *.mgmt.gunzy.xyz User terraform
-    IdentityFile ~/.ssh/terraform.pub
-
+# Home Ops / Lab Machines
 Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
     User gunzy
     IdentitiesOnly yes
@@ -56,17 +32,11 @@ Host github.com
     IdentitiesOnly yes
 
 {{ if .local.is_work -}}
-{{ if .local.is_primary -}}
 {{ $githuborg := onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/github-org") "my.1password.com" -}}
 Host {{ $githuborg }}
     Hostname github.com
     IdentityFile ~/.ssh/github-external.pub
-{{- if (eq .chezmoi.os "darwin") }}
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-{{- else }}
-    IdentityAgent ~/.1password/agent.sock
-{{ end }}
     IdentitiesOnly yes
 
-{{ end -}}
 {{ end -}}
