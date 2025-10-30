@@ -18,3 +18,10 @@ item = "gunzy-{{ .local.machine_name -}}"
 vault = "Private"
 
 {{ end -}}
+{{ if not .local.git_signing_use_yubikey -}}
+[[ssh-keys]]
+item = "git-sign"
+vault = "Private"
+account = "my.1password.com"
+
+{{ end -}}

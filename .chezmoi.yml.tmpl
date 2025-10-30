@@ -1,7 +1,7 @@
 {{- $desktop := promptBool "Is this machine a desktop?" -}}
 {{- $work := promptBool "Is this machine a work machine?" -}}
-{{- $choices := list "1" "2" -}}
-{{- $git_signing_key := promptChoice "Which Yubikey are you using for signing?" $choices -}}
+{{- $choices := list "1" "2" "none" -}}
+{{- $git_signing_yubikey := promptChoice "Which Yubikey are you using for signing?" $choices -}}
 data:
   local:
     is_desktop: {{ $desktop }}
@@ -11,6 +11,9 @@ data:
 {{- else }}
     machine_name: {{ .chezmoi.hostname }}
 {{- end }}
-    git_signing_key_index: {{ $git_signing_key }}
+    git_signing_use_yubikey: {{ if eq $git_signing_yubikey "none" }}false{{ else }}true{{ end }}
+{{- if ne $git_signing_yubikey "none" }}
+    git_signing_yubikey_index: {{ $git_signing_yubikey }}
+{{- end }}
 
 pager: "less -R"

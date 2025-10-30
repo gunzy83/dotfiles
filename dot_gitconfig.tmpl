@@ -1,13 +1,20 @@
 [user]
     name = Ross Williams
     email = gunzy83au@gmail.com
+{{- if .local.git_signing_use_yubikey }}
     signingkey = ~/.ssh/git_sign_sk
+{{- else }}
+    signingkey = {{ onepasswordRead (print "op://Private/git-sign/public_key") "my.1password.com" }}
+{{- end }}
 
 [gpg]
     format = ssh
 
 [gpg "ssh"]
     allowedSignersFile = ~/.ssh/allowed_signers
+{{- if not .local.git_signing_use_yubikey }}
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- end }}
 
 [commit]
     gpgsign = true
