@@ -187,7 +187,10 @@ prepare_1password(){
   info "Preparing 1password for chezmoi apply..."
 
   if [ "$OS" == 'Darwin' ]; then
-    info "Installing 1password-cli..."
+    info "Installing 1password and 1password-cli..."
+    if [ ! -d "/Applications/1Password.app" ]; then
+      brew install --cask 1password
+    fi
     brew install --cask 1password-cli
     info "Install complete!"
   elif [ "$OS" == 'Ubuntu' ]; then
