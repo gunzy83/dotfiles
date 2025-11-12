@@ -6,8 +6,10 @@ brew "asdf"
 brew "awscli"
 brew "bash"
 brew "chezmoi"
+brew "colima"
 brew "coreutils"
 brew "direnv"
+brew "docker"
 brew "doggo"
 brew "gh"
 brew "gnupg"
@@ -40,13 +42,15 @@ brew "zsh"
 cask "1password"
 {{- end }}
 cask "1password-cli"
+cask "caffeine"
 cask "capacities"
 cask "discord"
 cask "font-fira-code-nerd-font"
 cask "ghostty"
 cask "maccy"
-{{- if not .local.is_work }}
 cask "openlens"
+{{- if not .local.is_work }}
+cask "plex"
 {{- end }}
 cask "scroll-reverser"
 {{- if .local.is_work }}
