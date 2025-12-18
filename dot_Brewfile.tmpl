@@ -1,4 +1,5 @@
 {{- if eq .chezmoi.os "darwin" }}
+tap "lindell/multi-gitter"
 {{- if .local.is_work }}
 tap "tink-crypto/tink-tinkey", "https://github.com/tink-crypto/tink-tinkey"
 {{- end }}
@@ -49,6 +50,7 @@ cask "font-fira-code-nerd-font"
 cask "freelens"
 cask "ghostty"
 cask "karabiner-elements"
+cask "lindell/multi-gitter/multi-gitter"
 cask "maccy"
 {{- if not .local.is_work }}
 cask "plex"
