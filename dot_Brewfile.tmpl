@@ -1,5 +1,10 @@
 {{- if eq .chezmoi.os "darwin" }}
+{{- if .local.is_work }}
 tap "lindell/multi-gitter"
+{{- end }}
+{{- if not .local.is_work }}
+tap "siderolabs/tap"
+{{- end }}
 {{- if .local.is_work }}
 tap "tink-crypto/tink-tinkey", "https://github.com/tink-crypto/tink-tinkey"
 {{- end }}
@@ -13,8 +18,11 @@ brew "direnv"
 brew "docker"
 brew "doggo"
 brew "gh"
-brew "gnupg"
 brew "git"
+brew "gnupg"
+{{- if not .local.is_work }}
+brew "incus"
+{{- end }}
 brew "jq"
 {{- if .local.is_work }}
 brew "jwt-cli"
@@ -22,6 +30,7 @@ brew "jwt-cli"
 brew "k3d"
 brew "k9s"
 brew "libpq"
+brew "mise"
 brew "nmap"
 {{- if .local.is_work }}
 brew "mysql@8.4"
@@ -30,6 +39,9 @@ brew "nmap"
 brew "openssh"
 {{- if .local.is_work }}
 brew "rustup"
+{{- end }}
+{{- if not .local.is_work }}
+brew "siderolabs/tap/sidero-tools"
 {{- end }}
 brew "starship"
 brew "terminal-notifier"
@@ -62,8 +74,10 @@ cask "session-manager-plugin"
 {{- if not .local.is_work }}
 cask "slack"
 cask "spotify"
+cask "tailscale-app"
 cask "visual-studio-code"
 cask "wavebox"
+cask "wifiman"
 {{- end }}
 cask "wireshark-app"
 cask "yubico-authenticator"
