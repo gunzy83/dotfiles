@@ -1,4 +1,5 @@
 zmodule gunzy83/zim-asdf
+zmodule joke/zim-mise
 zmodule gunzy83/zim-teleport
 zmodule joke/zim-chezmoi
 zmodule joke/zim-github-cli
@@ -11,7 +12,9 @@ zmodule input
 zmodule utility
 zmodule zsh-users/zsh-completions --fpath src
 zmodule ahmetb/kubectx --fpath completion
+
 # modules that add completions must come before this line:
+
 zmodule completion
 zmodule 3v1n0/zsh-bash-completions-fallback
 zmodule zsh-users/zsh-history-substring-search
