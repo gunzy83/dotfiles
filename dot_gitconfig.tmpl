@@ -53,6 +53,9 @@
 [alias]
     newbranch = "!f(){ if [ -z $@ ]; then echo 'Usage: git newbranch <branch_name>'; else git checkout $(git main) && git sync && git checkout -b $@; fi; };f"
 
+[alias]
+    uncommit = "reset HEAD~1"
+
 [tig "color"]
     cursor = color15 color9 bold
     title-focus = color15 color9
