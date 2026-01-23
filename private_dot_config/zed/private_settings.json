@@ -1,0 +1,43 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "outline_panel": {
+    "auto_fold_dirs": true,
+  },
+  "project_panel": {
+    "auto_fold_dirs": false,
+    "folder_icons": true,
+  },
+  "gutter": {
+    "folds": true,
+  },
+  "ui_font_family": ".ZedSans",
+  "buffer_font_family": "FiraCode Nerd Font Mono",
+  "buffer_font_weight": 400.0,
+  "buffer_line_height": "comfortable",
+  "when_closing_with_no_tabs": "close_window",
+  "icon_theme": "Monospace Icon Theme - Dark",
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "features": {
+    "edit_prediction_provider": "copilot",
+  },
+  "ui_font_size": 15.0,
+  "buffer_font_size": 12.0,
+  "theme": "Ayu Mirage",
+  "base_keymap": "SublimeText",
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "auto_update": false,
+}
