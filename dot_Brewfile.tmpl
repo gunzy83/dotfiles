@@ -1,89 +1,41 @@
+{{- /* Brewfile generated from .chezmoidata/apps.yml using union and sortAlpha.
+     This template expects .chezmoidata/apps.yaml to have:
+       common:
+         taps: []
+         formulae: [...]
+         casks: [...]
+       work:
+         taps: [...]
+         formulae: [...]
+         casks: [...]
+       personal:
+         taps: [...]
+         formulae: [...]
+         casks: [...]
+*/ -}}
 {{- if eq .chezmoi.os "darwin" }}
-{{- if .local.is_work }}
-tap "lindell/multi-gitter"
+{{- $apps := .apps }}
+{{- $section := or .local.is_work $apps.personal $apps.work }}
+{{- $taps := list -}}
+{{- range concat $apps.common.taps $section.taps -}}
+{{- if hasKey . "url" -}}
+    {{- $entry := printf "\"%s\", \"%s\"" .name .url -}}
+    {{- $taps = append $taps $entry -}}
+{{- else if hasKey . "name" -}}
+    {{- $entry := printf "\"%s\"" .name -}}
+    {{- $taps = append $taps $entry -}}
+{{- else -}}
+    {{- $entry := printf "\"%s\"" . -}}
+    {{- $taps = append $taps $entry -}}
+{{- end -}}
+{{- end -}}
+{{- range $taps | uniq | sortAlpha }}
+tap {{ . }}
 {{- end }}
-{{- if not .local.is_work }}
-tap "siderolabs/tap"
+{{- range concat $apps.common.formulae $section.formulae | uniq | sortAlpha }}
+brew "{{ . }}"
 {{- end }}
-{{- if .local.is_work }}
-tap "tink-crypto/tink-tinkey", "https://github.com/tink-crypto/tink-tinkey"
+{{- range concat $apps.common.casks $section.casks | uniq | sortAlpha }}
+cask "{{ . }}"
 {{- end }}
-brew "asdf"
-brew "awscli"
-brew "bash"
-brew "chezmoi"
-brew "colima"
-brew "coreutils"
-brew "direnv"
-brew "docker"
-brew "doggo"
-brew "gh"
-brew "git"
-brew "gnupg"
-{{- if not .local.is_work }}
-brew "incus"
-{{- end }}
-brew "jq"
-{{- if .local.is_work }}
-brew "jwt-cli"
-{{- end }}
-brew "k3d"
-brew "k9s"
-brew "libpq"
-brew "mise"
-brew "nmap"
-{{- if .local.is_work }}
-brew "mysql@8.4"
-{{- end }}
-brew "nmap"
-brew "opencode"
-brew "openssh"
-{{- if .local.is_work }}
-brew "rustup"
-{{- end }}
-{{- if not .local.is_work }}
-brew "siderolabs/tap/sidero-tools"
-{{- end }}
-brew "starship"
-brew "terminal-notifier"
-{{- if .local.is_work }}
-brew "tink-crypto/tink-tinkey/tinkey"
-{{- end }}
-brew "tig"
-brew "vim"
-brew "zsh"
-{{- if not .local.is_work }}
-cask "1password"
-{{- end }}
-cask "1password-cli"
-cask "caffeine"
-cask "capacities"
-cask "copilot-cli"
-cask "discord"
-cask "font-fira-code-nerd-font"
-cask "freelens"
-cask "ghostty"
-cask "karabiner-elements"
-{{- if .local.is_work }}
-cask "lindell/multi-gitter/multi-gitter"
-{{- end }}
-cask "maccy"
-{{- if not .local.is_work }}
-cask "plex"
-{{- end }}
-cask "scroll-reverser"
-{{- if .local.is_work }}
-cask "session-manager-plugin"
-{{- end }}
-{{- if not .local.is_work }}
-cask "slack"
-cask "spotify"
-cask "tailscale-app"
-cask "visual-studio-code"
-cask "wavebox"
-cask "wifiman"
-{{- end }}
-cask "wireshark-app"
-cask "yubico-authenticator"
-cask "zed"
 {{- end }}

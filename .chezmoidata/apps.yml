@@ -1,0 +1,74 @@
+apps:
+  common:
+    taps: []
+    formulae:
+      - asdf
+      - awscli
+      - bash
+      - chezmoi
+      - colima
+      - coreutils
+      - direnv
+      - docker
+      - doggo
+      - gh
+      - git
+      - gnupg
+      - jq
+      - k3d
+      - k9s
+      - libpq
+      - mise
+      - nmap
+      - opencode
+      - openssh
+      - starship
+      - terminal-notifier
+      - tig
+      - vim
+      - zsh
+    casks:
+      - 1password-cli
+      - capacities
+      - caffeine
+      - copilot-cli
+      - discord
+      - font-fira-code-nerd-font
+      - freelens
+      - ghostty
+      - karabiner-elements
+      - maccy
+      - scroll-reverser
+      - wireshark-app
+      - yubico-authenticator
+      - zed
+
+  work:
+    taps:
+      - name: lindell/multi-gitter
+      - name: tink-crypto/tink-tinkey
+        url: https://github.com/tink-crypto/tink-tinkey
+    formulae:
+      - jwt-cli
+      - mysql@8.4
+      - rustup
+      - tink-crypto/tink-tinkey/tinkey
+    casks:
+      - lindell/multi-gitter/multi-gitter
+      - session-manager-plugin
+
+  personal:
+    taps:
+      - name: siderolabs/tap
+    formulae:
+      - incus
+      - siderolabs/tap/sidero-tools
+    casks:
+      - 1password
+      - plex
+      - slack
+      - spotify
+      - tailscale-app
+      - visual-studio-code
+      - wavebox
+      - wifiman

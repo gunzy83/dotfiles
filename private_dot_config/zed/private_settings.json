@@ -8,14 +8,14 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "outline_panel": {
-    "auto_fold_dirs": true
+    "auto_fold_dirs": true,
   },
   "project_panel": {
     "auto_fold_dirs": false,
-    "folder_icons": true
+    "folder_icons": true,
   },
   "gutter": {
-    "folds": true
+    "folds": true,
   },
   "ui_font_family": ".ZedSans",
   "buffer_font_family": "FiraCode Nerd Font Mono",
@@ -26,13 +26,26 @@
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5-mini"
+      "model": "gpt-4.1",
     },
-    "favorite_models": [],
-    "model_parameters": []
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "gpt-4.1"
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-sonnet-4.5"
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "gemini-3-pro-preview"
+      }
+    ],
+    "model_parameters": [],
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "ui_font_size": 15.0,
   "buffer_font_size": 12.0,
@@ -45,8 +58,8 @@
     "git-firefly": true,
     "github-actions": true,
     "html": true,
-    "monospace-icon-theme vscode-great-icons": true,
+    "monospace-icon-theme": true,
     "toml": true,
-    "vscode-great-icons": true
-  }
+    "vscode-great-icons": true,
+  },
 }
