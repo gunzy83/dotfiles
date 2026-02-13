@@ -1,0 +1,3 @@
+{{ if not .local.is_work }}
+{{ onepasswordRead (print "op://Private/ansible/public_key") "my.1password.com" }}
+{{ end -}}

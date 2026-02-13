@@ -1,5 +1,5 @@
-zmodule gunzy83/zim-asdf
 zmodule joke/zim-mise
+zmodule gunzy83/zim-asdf
 zmodule gunzy83/zim-teleport
 zmodule joke/zim-chezmoi
 zmodule joke/zim-github-cli

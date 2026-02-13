@@ -66,6 +66,9 @@ apps:
     casks:
       - 1password
       - plex
+      - seadrive
+      - seafile-client
+      - signal
       - slack
       - spotify
       - tailscale-app

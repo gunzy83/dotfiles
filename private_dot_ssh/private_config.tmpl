@@ -17,7 +17,13 @@ Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
     User gunzy
     IdentitiesOnly yes
     IdentityFile ~/.ssh/gunzy.pub
-    IdentityAgent ~/.1password/agent.sock
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
+    User ansible
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/ansible.pub
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 {{ end -}}
 
 # Github

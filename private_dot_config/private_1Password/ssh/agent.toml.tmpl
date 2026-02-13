@@ -17,6 +17,10 @@ vault = "Private"
 item = "gunzy-{{ .local.machine_name -}}"
 vault = "Private"
 
+[[ssh-keys]]
+item = "ansible"
+vault = "Private"
+
 {{ end -}}
 {{ if not .local.git_signing_use_yubikey -}}
 [[ssh-keys]]
