@@ -1,5 +1,5 @@
 auth0-cli 1.4.0
-awscli 2.25.11
+awscli 2.32.29
 github-cli 2.69.0
 golang 1.22.1
 helm 3.13.2

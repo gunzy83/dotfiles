@@ -1,0 +1,35 @@
+{
+  "zed_settings": {
+    "outline_panel": {
+      "auto_fold_dirs": true
+    },
+    "project_panel": {
+      "auto_fold_dirs": false,
+      "folder_icons": true
+    },
+    "gutter": {
+      "folds": true
+    },
+    "ui_font_family": ".ZedSans",
+    "buffer_font_family": "FiraCode Nerd Font Mono",
+    "buffer_font_weight": 400.0,
+    "buffer_line_height": "comfortable",
+    "when_closing_with_no_tabs": "close_window",
+    "icon_theme": "Monospace Icon Theme - Dark",
+    "ui_font_size": 15.0,
+    "buffer_font_size": 12.0,
+    "theme": "Ayu Mirage",
+    "base_keymap": "SublimeText",
+    "multi_cursor_modifier": "cmd_or_ctrl",
+    "auto_update": false,
+    "auto_install_extensions": {
+      "dockerfile": true,
+      "git-firefly": true,
+      "github-actions": true,
+      "html": true,
+      "monospace-icon-theme": true,
+      "toml": true,
+      "vscode-great-icons": true
+    }
+  }
+}

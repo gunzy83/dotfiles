@@ -1,3 +1,8 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+# Colima config
+Include /Users/rossco/.colima/ssh_config
+
+{{ end -}}
 # Security related config, override on a per host basis to support legacy systems.
 # source: https://infosec.mozilla.org/guidelines/openssh#modern
 HashKnownHosts yes
@@ -17,13 +22,21 @@ Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
     User gunzy
     IdentitiesOnly yes
     IdentityFile ~/.ssh/gunzy.pub
+{{- if (eq .chezmoi.os "darwin") }}
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- else }}
+    IdentityAgent ~/.1password/agent.sock
+{{ end }}
 
 Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
     User ansible
     IdentitiesOnly yes
     IdentityFile ~/.ssh/ansible.pub
+{{- if (eq .chezmoi.os "darwin") }}
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- else }}
+    IdentityAgent ~/.1password/agent.sock
+{{ end }}
 {{ end -}}
 
 # Github

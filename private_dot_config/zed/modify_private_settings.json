@@ -1,0 +1,6 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* Handle empty stdin by defaulting to an empty JSON object "{}" */ -}}
+{{- $input := .chezmoi.stdin | default "{}" -}}
+{{- $existing := fromJson $input -}}
+{{- $overrides := .zed_settings -}}
+{{- merge $existing $overrides | toPrettyJson -}}

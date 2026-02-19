@@ -15,7 +15,7 @@
 */ -}}
 {{- if eq .chezmoi.os "darwin" }}
 {{- $apps := .apps }}
-{{- $section := or .local.is_work $apps.personal $apps.work }}
+{{- $section := (ternary $apps.work $apps.personal .local.is_work) }}
 {{- $taps := list -}}
 {{- range concat $apps.common.taps $section.taps -}}
 {{- if hasKey . "url" -}}
