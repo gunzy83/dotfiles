@@ -11,6 +11,7 @@ apps:
       - direnv
       - docker
       - docker-buildx
+      - docker-compose
       - doggo
       - gh
       - git
@@ -64,6 +65,7 @@ apps:
     formulae:
       - cosign
       - incus
+      - ipmitool
       - siderolabs/tap/sidero-tools
     casks:
       - 1password
@@ -73,6 +75,7 @@ apps:
       - signal
       - slack
       - spotify
+      - steam
       - tailscale-app
       - visual-studio-code
       - wavebox
