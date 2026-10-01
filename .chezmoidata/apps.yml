@@ -1,6 +1,7 @@
 apps:
   common:
-    taps: []
+    taps:
+      - name: deskflow/tap
     formulae:
       - asdf
       - awscli
@@ -34,6 +35,7 @@ apps:
       - capacities
       - caffeine
       - copilot-cli
+      - deskflow
       - discord
       - font-fira-code-nerd-font
       - freelens
@@ -42,7 +44,6 @@ apps:
       - maccy
       - scroll-reverser
       - stats
-      - wireshark-app
       - yubico-authenticator
       - zed
 
@@ -52,6 +53,7 @@ apps:
       - name: tink-crypto/tink-tinkey
         url: https://github.com/tink-crypto/tink-tinkey
     formulae:
+      - claude-code
       - jwt-cli
       - mysql@8.4
       - rustup
