@@ -1,6 +1,10 @@
+{{ if .local.is_work -}}
+zmodule asdf
+{{- end -}}
 zmodule joke/zim-mise
-zmodule gunzy83/zim-asdf
+{{ if .local.is_work -}}
 zmodule gunzy83/zim-teleport
+{{ end -}}
 zmodule joke/zim-chezmoi
 zmodule joke/zim-github-cli
 zmodule joke/zim-helm

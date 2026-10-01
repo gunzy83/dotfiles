@@ -41,6 +41,7 @@ apps:
       - karabiner-elements
       - maccy
       - scroll-reverser
+      - stats
       - wireshark-app
       - yubico-authenticator
       - zed
