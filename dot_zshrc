@@ -27,6 +27,9 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 
+# Intialise bash completion compatibility after zim init
+autoload -Uz bashcompinit && bashcompinit
+
 export fpath=(~/.zsh/completions $fpath)
 # Allows ^ to be passed to the command if there is no match for the glob pattern:
 unsetopt nomatch

@@ -1,0 +1,9 @@
+{{ if .local.is_work -}}
+{{ $githubWorkHostOverride := onepasswordRead (print "op://Private/gitconfig-work/github-host-override") "my.1password.com" -}}
+Host {{ $githubWorkHostOverride }}
+    Hostname github.com
+    IdentityFile ~/.ssh/github-work.pub
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    IdentitiesOnly yes
+
+{{ end -}}

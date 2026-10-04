@@ -11,7 +11,7 @@ kubecm 0.25.0
 kubectl 1.27.8
 kubectx 0.9.5
 nodejs 20.11.1
-python 3.13.2
+python 3.14.7
 task 3.42.1
 teleport-ent 17.4.2
 yq 4.46.1

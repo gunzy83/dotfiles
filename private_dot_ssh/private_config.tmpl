@@ -16,46 +16,4 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@op
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
 # End security related config
 
-{{ if not .local.is_work }}
-# Home Ops / Lab Machines
-Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
-    User gunzy
-    IdentitiesOnly yes
-    IdentityFile ~/.ssh/gunzy.pub
-{{- if (eq .chezmoi.os "darwin") }}
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-{{- else }}
-    IdentityAgent ~/.1password/agent.sock
-{{ end }}
-
-Host *.mgmt.gunzy.xyz *.home.gunzy.xyz
-    User ansible
-    IdentitiesOnly yes
-    IdentityFile ~/.ssh/ansible.pub
-{{- if (eq .chezmoi.os "darwin") }}
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-{{- else }}
-    IdentityAgent ~/.1password/agent.sock
-{{ end }}
-{{ end -}}
-
-# Github
-Host github.com
-    Hostname github.com
-    IdentityFile ~/.ssh/github.pub
-{{- if (eq .chezmoi.os "darwin") }}
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-{{- else }}
-    IdentityAgent ~/.1password/agent.sock
-{{ end }}
-    IdentitiesOnly yes
-
-{{ if .local.is_work -}}
-{{ $githuborg := onepasswordRead (print "op://Private/p3dbnfqnt64sia2ua7m3rihdxq/github-org") "my.1password.com" -}}
-Host {{ $githuborg }}
-    Hostname github.com
-    IdentityFile ~/.ssh/github-external.pub
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-    IdentitiesOnly yes
-
-{{ end -}}
+Include config.d/*

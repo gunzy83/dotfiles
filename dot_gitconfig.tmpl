@@ -36,7 +36,7 @@
     submodule = log
 
 [init]
-    defaultBranch = master
+    defaultBranch = main
 
 [alias]
     fix-head-origin = remote set-head origin --auto
@@ -61,11 +61,12 @@
     title-focus = color15 color9
     title-blur = color8 color12
 
+[includeIf "hasconfig:remote.*.url:git@github.com:recursive-cloud/**"]
+    path = ~/.gitconfig-recursive-cloud
 {{ if .local.is_work -}}
-{{ template "org-gitconfig-include-if" dict "op_entry" "jxyeahxa67ygphrtxfwm644jei" "included_file" "~/.gitconfigwork" }}
-{{ template "org-gitconfig-include-if" dict "op_entry" "p3dbnfqnt64sia2ua7m3rihdxq" "included_file" "~/.gitconfigexternal" }}
-{{ $githuborg := onepasswordRead (print "op://Private/jxyeahxa67ygphrtxfwm644jei/github-org") "my.1password.com" }}
-[url "ssh://git@github.com/{{ $githuborg -}}/"]
-    insteadOf = https://github.com/{{ $githuborg -}}/
-
+{{ $githuborgs := onepasswordRead (print "op://Private/gitconfig-work/org-names") "my.1password.com" | fromJson -}}
+{{ range $githuborgs }}
+[includeIf "hasconfig:remote.*.url:git@github.com:{{ . -}}/**"]
+    path = ~/.gitconfig-{{ . | lower }}
+{{ end -}}
 {{ end -}}

@@ -1,0 +1,3 @@
+{{ if and .local.is_work .local.git_signing_use_yubikey -}}
+{{ onepasswordRead (print "op://Private/git-sign-work-sk" .local.git_signing_yubikey_index "/private_key_b64") "my.1password.com" | b64dec -}}
+{{ end -}}

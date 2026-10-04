@@ -1,0 +1,13 @@
+{{- if .local.is_work -}}
+#!/bin/bash
+set -euo pipefail
+mkdir -p ~/.ssh/config.d
+# build a static script that deploys private org gitconfigs from 1password
+{{ $githuborgs := onepasswordRead (print "op://Private/gitconfig-work/org-names") "my.1password.com" | fromJson -}}
+{{ range $githuborgs }}
+op read "op://Private/gitconfig-work/{{ . | lower }}-gitconfig-b64" | base64 -d > ~/.gitconfig-{{ . | lower }}
+echo "Deployed ~/.gitconfig-{{ . | lower }}"
+cat ~/.gitconfig-{{ . | lower }}
+echo ""
+{{ end -}}
+{{ end -}}

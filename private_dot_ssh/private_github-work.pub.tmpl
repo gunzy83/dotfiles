@@ -1,0 +1,3 @@
+{{ if .local.is_work -}}
+{{ onepasswordRead (print "op://Private/github-" .local.machine_name "-work/public_key") "my.1password.com" }}
+{{ end -}}

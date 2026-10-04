@@ -53,12 +53,12 @@ apps:
       - name: tink-crypto/tink-tinkey
         url: https://github.com/tink-crypto/tink-tinkey
     formulae:
-      - claude-code
       - jwt-cli
       - mysql@8.4
       - rustup
       - tink-crypto/tink-tinkey/tinkey
     casks:
+      - claude-code
       - lindell/multi-gitter/multi-gitter
       - session-manager-plugin
 
